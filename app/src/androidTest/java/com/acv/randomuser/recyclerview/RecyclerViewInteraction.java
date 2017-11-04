@@ -16,32 +16,32 @@ import static android.support.test.espresso.contrib.RecyclerViewActions.scrollTo
 
 public class RecyclerViewInteraction<A> {
 
-  private Matcher<View> viewMatcher;
-  private List<A> items;
+    private Matcher<View> viewMatcher;
+    private List<A> items;
 
-  private RecyclerViewInteraction(Matcher<View> viewMatcher) {
-    this.viewMatcher = viewMatcher;
-  }
-
-  public static <A> RecyclerViewInteraction<A> onRecyclerView(Matcher<View> viewMatcher) {
-    return new RecyclerViewInteraction<>(viewMatcher);
-  }
-
-  public RecyclerViewInteraction<A> withItems(List<A> items) {
-    this.items = items;
-    return this;
-  }
-
-  public RecyclerViewInteraction<A> check(ItemViewAssertion<A> itemViewAssertion) {
-    for (int i = 0; i < items.size(); i++) {
-      onView(viewMatcher)
-          .perform(scrollToPosition(i))
-          .check(new RecyclerItemViewAssertion<>(i, items.get(i), itemViewAssertion));
+    private RecyclerViewInteraction(Matcher<View> viewMatcher) {
+        this.viewMatcher = viewMatcher;
     }
-    return this;
-  }
 
-  public interface ItemViewAssertion<A> {
-    void check(A item, View view, NoMatchingViewException e);
-  }
+    public static <A> RecyclerViewInteraction<A> onRecyclerView(Matcher<View> viewMatcher) {
+        return new RecyclerViewInteraction<>(viewMatcher);
+    }
+
+    public RecyclerViewInteraction<A> withItems(List<A> items) {
+        this.items = items;
+        return this;
+    }
+
+    public RecyclerViewInteraction<A> check(ItemViewAssertion<A> itemViewAssertion) {
+        for (int i = 0; i < items.size(); i++) {
+            onView(viewMatcher)
+                    .perform(scrollToPosition(i))
+                    .check(new RecyclerItemViewAssertion<>(i, items.get(i), itemViewAssertion));
+        }
+        return this;
+    }
+
+    public interface ItemViewAssertion<A> {
+        void check(A item, View view, NoMatchingViewException e);
+    }
 }
