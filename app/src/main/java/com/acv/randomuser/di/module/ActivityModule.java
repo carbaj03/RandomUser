@@ -1,4 +1,5 @@
-package com.acv.randomuser.di;
+package com.acv.randomuser.di.module;
+
 
 import android.app.Activity;
 

@@ -1,36 +1,28 @@
 package com.acv.randomuser;
 
 
-import android.app.Activity;
 import android.app.Application;
 
+import com.acv.randomuser.di.component.AppComponent;
+import com.acv.randomuser.di.component.DaggerAppComponent;
+import com.acv.randomuser.di.module.AppModule;
 
-import com.acv.randomuser.di.DaggerAppComponent;
-
-import javax.inject.Inject;
-
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-
-public class App extends Application implements HasActivityInjector {
-    @Inject
-    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+public class App extends Application {
+    public static AppComponent appComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        DaggerAppComponent
-                .builder()
-                .application(this)
-                .build()
-                .inject(this);
+        appComponent = initializeDagger();
     }
 
-    @Override
-    public AndroidInjector<Activity> activityInjector() {
-        return dispatchingAndroidInjector;
+    private AppComponent initializeDagger() {
+        return DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+    }
+
+    public void setAppComponent(AppComponent appComponent) {
+        App.appComponent = appComponent;
     }
 
 }

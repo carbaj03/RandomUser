@@ -1,4 +1,4 @@
-package com.acv.randomuser.di;
+package com.acv.randomuser.di.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

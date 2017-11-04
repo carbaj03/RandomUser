@@ -1,26 +1,23 @@
-package com.acv.randomuser.di;
+package com.acv.randomuser.di.module;
 
 
+import com.acv.randomuser.di.scope.ActivityScope;
 import com.acv.randomuser.ui.MainActivity;
 import com.acv.randomuser.ui.MainPresenter;
-import com.acv.randomuser.ui.MainPresenterI;
 import com.acv.randomuser.ui.MainView;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class MainActivityModule extends ActivityModule {
-    public MainActivityModule(MainActivity activity) {
+public class MainModule extends ActivityModule {
+    public MainModule(MainActivity activity) {
         super(activity);
     }
 
     @Provides
     @ActivityScope
-    public MainPresenter provideMainPresenter(
-            MainView view
-    ) {
+    public MainPresenter provideMainPresenter(MainView view) {
         return new MainPresenter(view);
     }
 
