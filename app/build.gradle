@@ -26,9 +26,11 @@ dependencies {
     implementation rootProject.ext.dependencies.design
     implementation rootProject.ext.dependencies.constraintLayout
     //dagger
+    annotationProcessor rootProject.ext.dependencies.daggerCompiler
+    annotationProcessor rootProject.ext.dependencies.daggerAndroidCompiler
+    implementation rootProject.ext.dependencies.daggerAndroid
+    implementation rootProject.ext.dependencies.daggerAndroidSupport
     implementation rootProject.ext.dependencies.dagger
-    implementation rootProject.ext.dependencies.daggerSupport
-    annotationProcessor rootProject.ext.dependencies.daggerProcessor
 
     testImplementation rootProject.ext.testDependencies.junit
     testImplementation rootProject.ext.testDependencies.mockito

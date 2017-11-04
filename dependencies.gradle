@@ -10,9 +10,11 @@ allprojects {
                 constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
                 design          : "com.android.support:design:$supportLibraryVersion",
 
-                dagger          : "com.google.dagger:dagger-android:$dagger",
-                daggerSupport   : "com.google.dagger:dagger-android-support:$dagger",
-                daggerProcessor : "com.google.dagger:dagger-android-processor:$dagger"
+                daggerCompiler       : "com.google.dagger:dagger-compiler:$dagger",
+                dagger               : "com.google.dagger:dagger:$dagger",
+                daggerAndroid        : "com.google.dagger:dagger-android:$dagger",
+                daggerAndroidSupport : "com.google.dagger:dagger-android-support:$dagger",
+                daggerAndroidCompiler: "com.google.dagger:dagger-android-processor:$dagger",
         ]
 
         testDependencies = [
