@@ -20,10 +20,15 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    //support
     implementation rootProject.ext.dependencies.appCompatV7
     implementation rootProject.ext.dependencies.recyclerViewV7
     implementation rootProject.ext.dependencies.design
     implementation rootProject.ext.dependencies.constraintLayout
+    //dagger
+    implementation rootProject.ext.dependencies.dagger
+    implementation rootProject.ext.dependencies.daggerSupport
+    annotationProcessor rootProject.ext.dependencies.daggerProcessor
 
     testImplementation rootProject.ext.testDependencies.junit
     testImplementation rootProject.ext.testDependencies.mockito

@@ -3,11 +3,16 @@ allprojects {
 
         supportLibraryVersion = "26.1.0"
         constraintLayoutVersion = "1.0.2"
+        dagger = "2.12"
         dependencies = [
                 appCompatV7     : "com.android.support:appcompat-v7:$supportLibraryVersion",
                 recyclerViewV7  : "com.android.support:recyclerview-v7:$supportLibraryVersion",
                 constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
-                design          : "com.android.support:design:$supportLibraryVersion"
+                design          : "com.android.support:design:$supportLibraryVersion",
+
+                dagger          : "com.google.dagger:dagger-android:$dagger",
+                daggerSupport   : "com.google.dagger:dagger-android-support:$dagger",
+                daggerProcessor : "com.google.dagger:dagger-android-processor:$dagger"
         ]
 
         testDependencies = [
