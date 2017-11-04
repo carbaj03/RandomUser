@@ -1,7 +1,16 @@
 package com.acv.randomuser.di;
 
-import dagger.Module;
+import android.content.Context;
 
-@Module(includes = ViewModelModule.class)
+import com.acv.randomuser.App;
+
+import dagger.Module;
+import dagger.Provides;
+
+@Module
 class AppModule {
+    @Provides
+    Context provideContext(App application) {
+        return application.getApplicationContext();
+    }
 }

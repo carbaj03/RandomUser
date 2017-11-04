@@ -13,16 +13,21 @@ import com.acv.randomuser.R;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainView{
     @BindView(R.id.rvRandomUser)
     RecyclerView rvRandomUser;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @Inject
+    protected MainPresenter presenter;
 
     private RandomUserAdapter adapter;
 
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initRecyclerView();
-        showRandomUsers(getRandomUsers(10));
+        presenter.loadRandomUsers();
     }
 
     private void initToolbar() {
@@ -50,23 +55,9 @@ public class MainActivity extends AppCompatActivity {
         rvRandomUser.setHasFixedSize(true);
     }
 
+    @Override
     public void showRandomUsers(List<RandomUserModel> randomUsers) {
         adapter.addAll(randomUsers);
         adapter.notifyDataSetChanged();
     }
-
-    private List<RandomUserModel> getRandomUsers(int numberOfRandomUsers) {
-        List<RandomUserModel> randomUserModels = new LinkedList<>();
-        for (int i = 0; i < numberOfRandomUsers; i++) {
-            String fullname = "RandomUser - " + i;
-            String email = "Email - " + i;
-            String picture = "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg";
-            String phone = "69979088 " + i;
-            RandomUserModel randomUserModel =
-                    new RandomUserModel(fullname, email, picture, phone);
-            randomUserModels.add(randomUserModel);
-        }
-        return randomUserModels;
-    }
-
 }

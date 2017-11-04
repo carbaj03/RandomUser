@@ -18,11 +18,8 @@ import dagger.android.AndroidInjectionModule;
         MainActivityModule.class
 })
 public interface AppComponent {
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        Builder application(Application application);
-
+    @Component.Builder interface Builder {
+        @BindsInstance Builder application(Application application);
         AppComponent build();
     }
 
