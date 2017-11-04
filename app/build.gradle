@@ -31,6 +31,9 @@ dependencies {
     implementation rootProject.ext.dependencies.daggerAndroid
     implementation rootProject.ext.dependencies.daggerAndroidSupport
     implementation rootProject.ext.dependencies.dagger
+    //ButterKnife
+    implementation rootProject.ext.dependencies.butterKnife
+    annotationProcessor rootProject.ext.dependencies.butterKnifeCompiler
 
     testImplementation rootProject.ext.testDependencies.junit
     testImplementation rootProject.ext.testDependencies.mockito

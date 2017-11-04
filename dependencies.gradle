@@ -4,6 +4,7 @@ allprojects {
         supportLibraryVersion = "26.1.0"
         constraintLayoutVersion = "1.0.2"
         dagger = "2.12"
+        butterKnife = "8.8.1"
         dependencies = [
                 appCompatV7     : "com.android.support:appcompat-v7:$supportLibraryVersion",
                 recyclerViewV7  : "com.android.support:recyclerview-v7:$supportLibraryVersion",
@@ -15,6 +16,9 @@ allprojects {
                 daggerAndroid        : "com.google.dagger:dagger-android:$dagger",
                 daggerAndroidSupport : "com.google.dagger:dagger-android-support:$dagger",
                 daggerAndroidCompiler: "com.google.dagger:dagger-android-processor:$dagger",
+
+                butterKnife          : "com.jakewharton:butterknife:$butterKnife",
+                butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:$butterKnife",
         ]
 
         testDependencies = [
