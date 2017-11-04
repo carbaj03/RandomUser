@@ -6,10 +6,10 @@ allprojects {
         dagger = "2.12"
         butterKnife = "8.8.1"
         dependencies = [
-                appCompatV7     : "com.android.support:appcompat-v7:$supportLibraryVersion",
-                recyclerViewV7  : "com.android.support:recyclerview-v7:$supportLibraryVersion",
-                constraintLayout: "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
-                design          : "com.android.support:design:$supportLibraryVersion",
+                appCompatV7          : "com.android.support:appcompat-v7:$supportLibraryVersion",
+                recyclerViewV7       : "com.android.support:recyclerview-v7:$supportLibraryVersion",
+                constraintLayout     : "com.android.support.constraint:constraint-layout:$constraintLayoutVersion",
+                design               : "com.android.support:design:$supportLibraryVersion",
 
                 daggerCompiler       : "com.google.dagger:dagger-compiler:$dagger",
                 dagger               : "com.google.dagger:dagger:$dagger",
@@ -31,6 +31,8 @@ allprojects {
         androidTestDependencies = [
                 runner         : "com.android.support.test:runner:1.0.1",
                 rules          : "com.android.support.test:rules:1.0.1",
+
+                daggerMock     : "com.github.fabioCollini.daggermock:daggermock:0.8.2",
 
                 espressoCore   : "com.android.support.test.espresso:espresso-core:$espressoVersion",
                 espressoContrib: "com.android.support.test.espresso:espresso-contrib:$espressoVersion",

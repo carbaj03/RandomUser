@@ -32,4 +32,5 @@ public class App extends Application implements HasActivityInjector {
     public AndroidInjector<Activity> activityInjector() {
         return dispatchingAndroidInjector;
     }
+
 }

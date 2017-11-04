@@ -1,7 +1,7 @@
 package com.acv.randomuser.di;
 
 
-import com.acv.randomuser.MainActivity;
+import com.acv.randomuser.ui.MainActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

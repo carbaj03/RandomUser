@@ -38,7 +38,19 @@ dependencies {
     testImplementation rootProject.ext.testDependencies.junit
     testImplementation rootProject.ext.testDependencies.mockito
 
+    androidTestImplementation rootProject.ext.androidTestDependencies.daggerMock
     androidTestImplementation rootProject.ext.androidTestDependencies.runner
     androidTestImplementation rootProject.ext.androidTestDependencies.rules
-    androidTestImplementation rootProject.ext.androidTestDependencies.espressoCore
+    androidTestCompile(rootProject.ext.androidTestDependencies.espressoCore, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile (rootProject.ext.androidTestDependencies.espressoContrib) {
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'appcompat-v7'
+        exclude module: 'design'
+        exclude module: 'support-v4'
+    }
+    androidTestCompile rootProject.ext.androidTestDependencies.espressoIntents
+
 }
