@@ -13,6 +13,7 @@ import com.acv.randomuser.data.network.RandomUserRetrofit;
 import com.acv.randomuser.domain.RandomUserNetwork;
 import com.acv.randomuser.domain.mapper.Mapper;
 import com.acv.randomuser.domain.model.RandomUser;
+import com.acv.randomuser.ui.model.RandomUserMapper;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -32,8 +33,10 @@ public class DataModule extends MapperData {
     public RandomUserRepository provideRandomUserRepository(
             RandomUserNetwork network,
             LocalStorage localStorage,
-            RandomDeleteUserLocalMapper mapperDelete) {
-        return new RandomUserRepository(network, localStorage, mapperDelete);
+            RandomDeleteUserLocalMapper mapperDelete,
+            RandomUserLocalMapper mapper
+    ) {
+        return new RandomUserRepository(network, localStorage, mapperDelete, mapper);
     }
 
     @Provides

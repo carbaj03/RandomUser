@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.acv.randomuser.App;
 import com.acv.randomuser.R;
+import com.acv.randomuser.di.module.DetailModule;
 import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.ui.common.BaseActivity;
 
@@ -28,6 +30,12 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         bindViews(this);
         configToolbarBack();
+        App.appComponent.plus(new DetailModule(this)).inject(this);
+        presenter.loadDetailRandomUser(getId());
+    }
+
+    private Id getId() {
+        return (Id) getIntent().getSerializableExtra(ID);
     }
 
     @Override
