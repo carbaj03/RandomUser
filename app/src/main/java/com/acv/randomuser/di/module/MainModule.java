@@ -5,6 +5,7 @@ import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.di.scope.ActivityScope;
 import com.acv.randomuser.domain.usecase.main.DeleteRandomUser;
 import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
+import com.acv.randomuser.domain.usecase.main.SaveRandomUser;
 import com.acv.randomuser.executor.UseCaseInvoker;
 import com.acv.randomuser.ui.decorator.AppViewInjector;
 import com.acv.randomuser.ui.main.MainActivity;
@@ -29,9 +30,10 @@ public class MainModule extends ActivityModule {
             MainView view,
             GetRandomUsers getRandomUsers,
             DeleteRandomUser deleteRandomUser,
+            SaveRandomUser saveRandomUser,
             RandomUserMapper mapper
     ) {
-        return new MainPresenter(appViewInjector, invoker, view, getRandomUsers, deleteRandomUser, mapper);
+        return new MainPresenter(appViewInjector, invoker, view, getRandomUsers, deleteRandomUser, saveRandomUser, mapper);
     }
 
     @ActivityScope
@@ -56,5 +58,11 @@ public class MainModule extends ActivityModule {
     @ActivityScope
     public DeleteRandomUser provideDeleteRandomUser(RandomUserRepository localGateway) {
         return new DeleteRandomUser(localGateway);
+    }
+
+    @Provides
+    @ActivityScope
+    public SaveRandomUser provideSaveRandomUser(RandomUserRepository localGateway) {
+        return new SaveRandomUser(localGateway);
     }
 }

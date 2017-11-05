@@ -32,8 +32,9 @@ public class MainPresenter extends Presenter<MainView> {
             UseCaseInvoker invoker,
             MainView view,
             GetRandomUsers getRandomUsers,
+            DeleteRandomUser deleteRandomUser,
             SaveRandomUser saveRandomUser,
-            DeleteRandomUser deleteRandomUser, RandomUserMapper mapper
+            RandomUserMapper mapper
     ) {
         super(viewInjector, view);
         this.invoker = invoker;

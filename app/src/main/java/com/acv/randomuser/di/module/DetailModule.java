@@ -1,12 +1,15 @@
 package com.acv.randomuser.di.module;
 
 
+import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.di.scope.ActivityScope;
+import com.acv.randomuser.domain.usecase.detail.GetRandomUserDetail;
 import com.acv.randomuser.executor.UseCaseInvoker;
 import com.acv.randomuser.ui.decorator.AppViewInjector;
 import com.acv.randomuser.ui.detail.DetailActivity;
 import com.acv.randomuser.ui.detail.DetailPresenter;
 import com.acv.randomuser.ui.detail.DetailView;
+import com.acv.randomuser.ui.model.RandomUserDetailMapper;
 
 import dagger.Module;
 import dagger.Provides;
@@ -22,9 +25,11 @@ public class DetailModule extends ActivityModule {
     public DetailPresenter provideDetailPresenter(
             AppViewInjector appViewInjector,
             UseCaseInvoker invoker,
-            DetailView view
+            GetRandomUserDetail getRandomUserDetail,
+            DetailView view,
+            RandomUserDetailMapper mapper
     ) {
-        return new DetailPresenter(appViewInjector, invoker, view);
+        return new DetailPresenter(appViewInjector, invoker, getRandomUserDetail, view, mapper);
     }
 
     @ActivityScope
@@ -33,5 +38,15 @@ public class DetailModule extends ActivityModule {
         return (DetailView) activity;
     }
 
+    @Provides
+    @ActivityScope
+    public GetRandomUserDetail provideSaveRandomUser(RandomUserRepository localGateway) {
+        return new GetRandomUserDetail(localGateway);
+    }
 
+    @Provides
+    @ActivityScope
+    public RandomUserDetailMapper provideRandomUserDetailMapper() {
+        return new RandomUserDetailMapper();
+    }
 }
