@@ -31,13 +31,23 @@ public class GetRandomUsersShould {
     }
 
     @Test
-    public void shouldReturnModelWhenNetworkGatewayIsCalled() throws Exception {
-        List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(10);
-        when(repository.getRandomUsers(10)).thenReturn(randomUsers);
+    public void returnModelWhenNetworkGatewayIsCalled() throws Exception {
+        List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(2);
+        when(repository.getRandomUsers()).thenReturn(randomUsers);
 
         UseCaseResponse<List<RandomUser>> response = getRandomUsers.call();
 
         Assert.assertNotNull(response);
         Assert.assertTrue(response.getResult().equals(randomUsers));
+    }
+
+    @Test
+    public void returnRandomUsersNotDuplicated() throws Exception {
+        List<RandomUser> randomUsers = RandomUserStub.getRandomUsersDuplicated(5,2);
+        when(repository.getRandomUsers()).thenReturn(randomUsers);
+
+        UseCaseResponse<List<RandomUser>> response = getRandomUsers.call();
+
+        Assert.assertTrue(response.getResult().size() == 5);
     }
 }

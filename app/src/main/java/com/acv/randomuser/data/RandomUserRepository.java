@@ -16,7 +16,7 @@ public class RandomUserRepository {
         this.network = network;
     }
 
-    public List<RandomUser> getRandomUsers(int numberOfRandomUsers) throws NetworkGatewayException, NetworkException {
+    public List<RandomUser> getRandomUsers() throws NetworkGatewayException, NetworkException {
         return network.obtainAllRandomUsers();
 //        List<RandomUser> randomUsers = new LinkedList<>();
 //        for (int i = 0; i < numberOfRandomUsers; i++) {

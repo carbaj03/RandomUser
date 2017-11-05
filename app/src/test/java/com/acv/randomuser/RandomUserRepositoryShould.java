@@ -32,9 +32,9 @@ public class RandomUserRepositoryShould {
     @Test
     public void obtainRandomUserFromNetwork() throws Exception {
         List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(10);
-        when(repository.getRandomUsers(10)).thenReturn(randomUsers);
+        when(repository.getRandomUsers()).thenReturn(randomUsers);
 
-        repository.getRandomUsers(10);
+        repository.getRandomUsers();
 
         verify(network).obtainAllRandomUsers();
     }

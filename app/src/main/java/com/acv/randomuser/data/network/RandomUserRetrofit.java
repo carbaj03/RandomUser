@@ -7,6 +7,7 @@ import com.acv.randomuser.domain.RandomUserNetwork;
 import com.acv.randomuser.domain.error.NetworkException;
 import com.acv.randomuser.domain.error.NetworkGatewayException;
 import com.acv.randomuser.domain.mapper.Mapper;
+import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.domain.model.RandomUser;
 
 import java.io.IOException;
@@ -14,7 +15,10 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -63,6 +67,7 @@ public class RandomUserRetrofit implements RandomUserNetwork {
     @NonNull
     private List<RandomUser> getRandomUsers(Response<RandomUserResponse> response) {
         List<RandomUser> randomUsers = new ArrayList<>();
+        HashMap<Id, RandomUser> random = new HashMap<>();
         List<RandomUserResult> results = response.body().getResults();
         if (results != null) {
             for (RandomUserResult result : results) {
@@ -71,4 +76,18 @@ public class RandomUserRetrofit implements RandomUserNetwork {
         }
         return randomUsers;
     }
+
+//    @NonNull
+//    private List<RandomUser> getRandomUsers(Response<RandomUserResponse> response) {
+//        HashMap<Id, RandomUser> random = new HashMap<>();
+//        List<RandomUserResult> results = response.body().getResults();
+//        if (results != null) {
+//            RandomUser map;
+//            for (RandomUserResult result : results) {
+//                map = mapper.map(result);
+//                random.put(map.getId(), map);
+//            }
+//        }
+//        return new ArrayList<>(random.values());
+//    }
 }

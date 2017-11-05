@@ -15,11 +15,15 @@ public class UseCaseExecution<T> {
     private final UseCase<UseCaseResponse<T>> interactor;
     private int priority;
 
-    public UseCaseExecution(UseCase<UseCaseResponse<T>> interactor) {
+    private UseCaseExecution(UseCase<UseCaseResponse<T>> interactor) {
         this.interactor = interactor;
     }
 
-    public UseCaseExecution<T> result(UseCaseResult<T> interactorResult) {
+    public static <T> UseCaseExecution<T> create(UseCase<UseCaseResponse<T>> interactor) {
+        return new UseCaseExecution<T>(interactor);
+    }
+
+    public UseCaseExecution<T> success(UseCaseResult<T> interactorResult) {
         this.interactorResult = interactorResult;
         return this;
     }
