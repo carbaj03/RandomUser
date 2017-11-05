@@ -3,7 +3,9 @@ package com.acv.randomuser.di.module;
 
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.di.scope.ActivityScope;
-import com.acv.randomuser.domain.GetRandomUsers;
+import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
+import com.acv.randomuser.executor.UseCaseInvoker;
+import com.acv.randomuser.ui.decorator.AppViewInjector;
 import com.acv.randomuser.ui.main.MainActivity;
 import com.acv.randomuser.ui.main.MainPresenter;
 import com.acv.randomuser.ui.main.MainView;
@@ -21,11 +23,13 @@ public class MainModule extends ActivityModule {
     @Provides
     @ActivityScope
     public MainPresenter provideMainPresenter(
+            AppViewInjector appViewInjector,
+            UseCaseInvoker invoker,
             MainView view,
             GetRandomUsers getRandomUsers,
             RandomUserMapper mapper
     ) {
-        return new MainPresenter(view, getRandomUsers, mapper);
+        return new MainPresenter(appViewInjector, invoker, view, getRandomUsers, mapper);
     }
 
     @ActivityScope

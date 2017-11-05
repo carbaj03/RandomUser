@@ -15,7 +15,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class AppModule {
+public class AppModule extends ThreadModule {
     private final App application;
 
     public AppModule(App application) {
@@ -39,4 +39,6 @@ public class AppModule {
     public ImageLoader provideImageLoader(GlideLoader glideLoader) {
         return glideLoader;
     }
+
+
 }

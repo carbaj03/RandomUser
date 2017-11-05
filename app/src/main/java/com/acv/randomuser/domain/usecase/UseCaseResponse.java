@@ -1,4 +1,4 @@
-package com.acv.randomuser.domain;
+package com.acv.randomuser.domain.usecase;
 
 public class UseCaseResponse<T> {
 

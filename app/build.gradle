@@ -10,6 +10,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "API_URL", '"http://api.randomuser.me/"'
+        buildConfigField "int", "CONCURRENT_INTERACTORS", "3"
+
     }
     buildTypes {
         release {
@@ -43,6 +45,9 @@ dependencies {
     implementation rootProject.ext.dependencies.jsonRetrofit
     implementation rootProject.ext.dependencies.okHttp
     implementation rootProject.ext.dependencies.logginInterceptor
+    //ThreadDecorator
+    implementation rootProject.ext.dependencies.threadDecoratedView
+    annotationProcessor rootProject.ext.dependencies.threadDecoratedViewCompiler
 
     testImplementation rootProject.ext.testDependencies.junit
     testImplementation rootProject.ext.testDependencies.mockito

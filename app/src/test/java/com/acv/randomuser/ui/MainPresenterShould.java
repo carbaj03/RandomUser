@@ -1,8 +1,8 @@
 package com.acv.randomuser.ui;
 
 import com.acv.randomuser.RandomUserStub;
-import com.acv.randomuser.domain.GetRandomUsers;
-import com.acv.randomuser.domain.UseCaseResponse;
+import com.acv.randomuser.domain.usecase.UseCaseResponse;
+import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
 import com.acv.randomuser.domain.model.RandomUser;
 import com.acv.randomuser.ui.main.MainPresenter;
 import com.acv.randomuser.ui.main.MainView;
@@ -31,7 +31,8 @@ public class MainPresenterShould {
 
     @Before
     public void setUp() {
-        presenter = new MainPresenter(view, getRandomUsers, mapper);
+        presenter = new MainPresenter(new FakeViewInjector(), TestUseCaseInvoker.create(),
+                view, getRandomUsers, mapper);
     }
 
     @Test

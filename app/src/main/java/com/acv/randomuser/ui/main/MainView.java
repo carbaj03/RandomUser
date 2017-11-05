@@ -1,10 +1,14 @@
 package com.acv.randomuser.ui.main;
 
 
+import com.acv.randomuser.ui.decorator.View;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
 import java.util.List;
 
-public interface MainView {
+import me.panavtec.threaddecoratedview.views.qualifiers.ThreadDecoratedView;
+
+@ThreadDecoratedView
+public interface MainView extends View {
     void showRandomUsers(List<RandomUserModel> randomUsers);
 }

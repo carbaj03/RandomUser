@@ -3,6 +3,8 @@ package com.acv.randomuser.domain;
 import com.acv.randomuser.RandomUserStub;
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.domain.model.RandomUser;
+import com.acv.randomuser.domain.usecase.UseCaseResponse;
+import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
 
 import org.junit.Assert;
 import org.junit.Before;

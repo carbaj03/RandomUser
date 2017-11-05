@@ -8,6 +8,7 @@ allprojects {
         glideVersion = "4.3.0"
         retrofitVersion = "2.3.0"
         okHttp = "3.8.0"
+        threadDecoratedView = "1.5.2"
         dependencies = [
                 appCompatV7          : "com.android.support:appcompat-v7:$supportLibraryVersion",
                 recyclerViewV7       : "com.android.support:recyclerview-v7:$supportLibraryVersion",
@@ -31,6 +32,9 @@ allprojects {
 
                 okHttp                     : "com.squareup.okhttp3:okhttp:$okHttp",
                 logginInterceptor          : "com.squareup.okhttp3:logging-interceptor:$okHttp",
+
+                threadDecoratedView        : "me.panavtec:threaddecoratedview-common:$threadDecoratedView",
+                threadDecoratedViewCompiler: "me.panavtec:threaddecoratedview-compiler:$threadDecoratedView",
         ]
 
         testDependencies = [
