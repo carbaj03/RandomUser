@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.detail.DetailActivity"
+            android:launchMode="singleTask"
+            android:label="@string/detail_title"
+            android:parentActivityName=".ui.detail.DetailActivity"/>
     </application>
 
 </manifest>

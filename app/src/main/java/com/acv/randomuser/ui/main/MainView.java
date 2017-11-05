@@ -1,6 +1,7 @@
 package com.acv.randomuser.ui.main;
 
 
+import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.ui.decorator.View;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
@@ -17,4 +18,6 @@ public interface MainView extends View {
     void showErrorNetwork();
 
     void removeItem(int position);
+
+    void navigateToDetail(Id id);
 }

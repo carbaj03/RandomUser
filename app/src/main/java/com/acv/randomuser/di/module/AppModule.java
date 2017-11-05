@@ -4,6 +4,7 @@ package com.acv.randomuser.di.module;
 import android.content.Context;
 
 import com.acv.randomuser.App;
+import com.acv.randomuser.ui.Navigator;
 import com.acv.randomuser.ui.common.GlideLoader;
 import com.acv.randomuser.ui.common.ImageLoader;
 import com.bumptech.glide.Glide;
@@ -38,6 +39,12 @@ public class AppModule extends ThreadModule {
     @Singleton
     public ImageLoader provideImageLoader(GlideLoader glideLoader) {
         return glideLoader;
+    }
+
+    @Provides
+    @Singleton
+    public Navigator provideNavigator() {
+        return new Navigator();
     }
 
 

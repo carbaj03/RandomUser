@@ -87,4 +87,8 @@ public class MainPresenter extends Presenter<MainView> {
                 })
                 .execute(invoker);
     }
+
+    public void checkRandomUser(int position) {
+        getView().navigateToDetail(randomUsers.get(position).getId());
+    }
 }

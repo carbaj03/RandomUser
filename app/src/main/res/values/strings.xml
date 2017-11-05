@@ -4,4 +4,10 @@
     <string name="error">Error</string>
     <string name="error_network">Error de Red</string>
     <string name="main_title">Random Users</string>
+    <string name="detail_title">Detail</string>
+
+
+
+    <string name="transition_name_name">transition:NAME</string>
+    <string name="transition_name_circle">transition:CIRCLE</string>
 </resources>

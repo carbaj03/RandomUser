@@ -2,7 +2,6 @@ package com.acv.randomuser.ui.main;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +10,9 @@ import android.view.View;
 import com.acv.randomuser.App;
 import com.acv.randomuser.R;
 import com.acv.randomuser.di.module.MainModule;
+import com.acv.randomuser.domain.model.Id;
+import com.acv.randomuser.ui.Navigator;
+import com.acv.randomuser.ui.common.BaseActivity;
 import com.acv.randomuser.ui.common.EndlessRecyclerViewScrollListener;
 import com.acv.randomuser.ui.common.ItemClickListener;
 import com.acv.randomuser.ui.common.SwipeToDelete;
@@ -23,7 +25,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView {
     @BindView(R.id.rvRandomUser)
     RecyclerView rvRandomUser;
 
@@ -32,25 +34,28 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Inject
     protected MainPresenter presenter;
+    @Inject
+    protected Navigator navigator;
+
     private EndlessRecyclerViewScrollListener onLoadMore;
     private RandomUserAdapter adapter;
+    private View transitionView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         App.appComponent.plus(new MainModule(this)).inject(this);
 
-        initToolbar();
+        initToolbar("Random User");
         initRecyclerView();
         initSwipeDelete();
         presenter.loadRandomUsers();
     }
 
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.main_title);
+    @Override
+    public int getLayout() {
+        return R.layout.activity_main;
     }
 
     private void initRecyclerView() {
@@ -59,7 +64,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
         adapter.setListener(new ItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                transitionView = view;
+                presenter.checkRandomUser(position);
             }
         });
         rvRandomUser.setAdapter(adapter);
@@ -106,5 +112,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void removeItem(int position) {
         adapter.removeItem(position);
+    }
+
+    @Override
+    public void navigateToDetail(Id id) {
+        navigator.navigateToDetail(this, transitionView, id);
     }
 }
