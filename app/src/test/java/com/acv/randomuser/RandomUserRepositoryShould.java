@@ -1,19 +1,43 @@
 package com.acv.randomuser;
 
 import com.acv.randomuser.data.RandomUserRepository;
+import com.acv.randomuser.domain.RandomUserNetwork;
 import com.acv.randomuser.domain.model.RandomUser;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RandomUserRepositoryShould {
 
     private RandomUserRepository repository;
 
+    @Mock
+    private RandomUserNetwork network;
+
+    @Before
+    public void setUp() throws Exception {
+        repository = new RandomUserRepository(network);
+    }
+
+    @Test
+    public void obtainRandomUserFromNetwork() throws Exception {
+        List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(10);
+        when(repository.getRandomUsers(10)).thenReturn(randomUsers);
+
+        repository.getRandomUsers(10);
+
+        verify(network).obtainAllRandomUsers();
+    }
 
     public void assertion(RandomUser randomUser) {
         assertEquals(randomUser.getGender(), "1");
