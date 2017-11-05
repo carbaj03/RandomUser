@@ -52,6 +52,8 @@ dependencies {
 
     testImplementation rootProject.ext.testDependencies.junit
     testImplementation rootProject.ext.testDependencies.mockito
+    testImplementation rootProject.ext.testDependencies.mockwebserver
+    testCompile 'commons-io:commons-io:2.4'
 
     androidTestImplementation rootProject.ext.androidTestDependencies.daggerMock
     androidTestImplementation rootProject.ext.androidTestDependencies.runner
