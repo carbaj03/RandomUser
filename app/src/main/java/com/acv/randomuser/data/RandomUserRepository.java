@@ -2,14 +2,10 @@ package com.acv.randomuser.data;
 
 
 import com.acv.randomuser.domain.RandomUserNetwork;
-import com.acv.randomuser.domain.model.Id;
-import com.acv.randomuser.domain.model.Location;
-import com.acv.randomuser.domain.model.Login;
-import com.acv.randomuser.domain.model.Name;
-import com.acv.randomuser.domain.model.Picture;
+import com.acv.randomuser.domain.error.NetworkGatewayException;
 import com.acv.randomuser.domain.model.RandomUser;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RandomUserRepository {
@@ -21,7 +17,11 @@ public class RandomUserRepository {
     }
 
     public List<RandomUser> getRandomUsers(int numberOfRandomUsers) {
-        return network.obtainAllRandomUsers();
+        try {
+            return network.obtainAllRandomUsers();
+        } catch (NetworkGatewayException e) {
+            return new ArrayList<>();
+        }
 //        List<RandomUser> randomUsers = new LinkedList<>();
 //        for (int i = 0; i < numberOfRandomUsers; i++) {
 //            randomUsers.add(new RandomUser(

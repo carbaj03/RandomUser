@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "API_URL", '"http://api.randomuser.me/"'
     }
     buildTypes {
         release {
@@ -37,6 +38,11 @@ dependencies {
     //Glide
     implementation rootProject.ext.dependencies.glide
     annotationProcessor rootProject.ext.dependencies.glideCompiler
+    //retrofit
+    implementation rootProject.ext.dependencies.retrofit
+    implementation rootProject.ext.dependencies.jsonRetrofit
+    implementation rootProject.ext.dependencies.okHttp
+    implementation rootProject.ext.dependencies.logginInterceptor
 
     testImplementation rootProject.ext.testDependencies.junit
     testImplementation rootProject.ext.testDependencies.mockito
