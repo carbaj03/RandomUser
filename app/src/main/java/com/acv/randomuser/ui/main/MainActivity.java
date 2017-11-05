@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import com.acv.randomuser.App;
 import com.acv.randomuser.R;
 import com.acv.randomuser.di.module.MainModule;
+import com.acv.randomuser.ui.common.SwipeToDelete;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
 import java.util.List;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         initToolbar();
         initRecyclerView();
+        initSwipeDelete();
         presenter.loadRandomUsers();
     }
 
@@ -53,6 +55,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
         rvRandomUser.setAdapter(adapter);
         rvRandomUser.setLayoutManager(new LinearLayoutManager(this));
         rvRandomUser.setHasFixedSize(true);
+    }
+
+    private void initSwipeDelete() {
+        SwipeToDelete swipeToDelete = new SwipeToDelete(rvRandomUser, new SwipeToDelete.Callback() {
+            @Override
+            public void onRemove(int position) {
+
+            }
+        });
+        swipeToDelete.init();
     }
 
     @Override
