@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import com.acv.randomuser.App;
 import com.acv.randomuser.R;
 import com.acv.randomuser.di.module.MainModule;
-import com.acv.randomuser.ui.RandomUserAdapter;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
 import java.util.List;
@@ -19,7 +18,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView{
+public class MainActivity extends AppCompatActivity implements MainView {
     @BindView(R.id.rvRandomUser)
     RecyclerView rvRandomUser;
 

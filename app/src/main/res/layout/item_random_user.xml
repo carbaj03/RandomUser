@@ -15,7 +15,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:scaleType="centerInside"
-        tools:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_launcher"
         tools:visibility="visible" />
 
     <TextView

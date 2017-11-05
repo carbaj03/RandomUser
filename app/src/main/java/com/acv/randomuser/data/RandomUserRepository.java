@@ -27,7 +27,7 @@ public class RandomUserRepository {
                     "myphone",
                     "mycell",
                     new Id("myname", "myvalue"),
-                    new Picture("large", "mymedium", "mythumbnail"),
+                    new Picture("large", "mymedium", "https://randomuser.me/api/portraits/men/83.jpg"),
                     "myNat"));
         }
         return randomUsers;

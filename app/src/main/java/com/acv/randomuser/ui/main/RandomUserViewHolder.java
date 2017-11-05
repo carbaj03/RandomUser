@@ -5,8 +5,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.acv.randomuser.App;
 import com.acv.randomuser.R;
+import com.acv.randomuser.di.module.HolderModule;
+import com.acv.randomuser.ui.common.ImageLoader;
 import com.acv.randomuser.ui.model.RandomUserModel;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,16 +27,21 @@ public class RandomUserViewHolder extends RecyclerView.ViewHolder implements Vie
     @BindView(R.id.tvPhone)
     TextView tvPhone;
 
+    @Inject
+    protected ImageLoader loader;
+
     public RandomUserViewHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(this);
+        App.appComponent.plus(new HolderModule()).inject(this);
     }
 
-    public void render(RandomUserModel randomUsers) {
-        tvName.setText(randomUsers.getFullName());
-        tvEmail.setText(randomUsers.getEmail());
-        tvPhone.setText(randomUsers.getPhone());
+    public void render(RandomUserModel randomUser) {
+        loader.loadCircle(randomUser.getPicture(), ivPicture);
+        tvName.setText(randomUser.getFullName());
+        tvEmail.setText(randomUser.getEmail());
+        tvPhone.setText(randomUser.getPhone());
     }
 
     @Override
