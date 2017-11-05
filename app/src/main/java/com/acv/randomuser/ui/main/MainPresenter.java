@@ -10,6 +10,7 @@ import com.acv.randomuser.domain.usecase.main.DeleteRandomUser;
 import com.acv.randomuser.domain.usecase.main.DeleteRandomUserError;
 import com.acv.randomuser.domain.usecase.main.GetRandomUserError;
 import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
+import com.acv.randomuser.domain.usecase.main.SaveRandomUser;
 import com.acv.randomuser.executor.UseCaseExecution;
 import com.acv.randomuser.executor.UseCaseInvoker;
 import com.acv.randomuser.ui.decorator.AppViewInjector;
@@ -21,6 +22,7 @@ import java.util.List;
 public class MainPresenter extends Presenter<MainView> {
     private final UseCaseInvoker invoker;
     private final GetRandomUsers getRandomUsers;
+    private final SaveRandomUser saveRandomUser;
     private final DeleteRandomUser deleteRandomUser;
     private final RandomUserMapper mapper;
     private List<RandomUser> randomUsers;
@@ -30,11 +32,13 @@ public class MainPresenter extends Presenter<MainView> {
             UseCaseInvoker invoker,
             MainView view,
             GetRandomUsers getRandomUsers,
+            SaveRandomUser saveRandomUser,
             DeleteRandomUser deleteRandomUser, RandomUserMapper mapper
     ) {
         super(viewInjector, view);
         this.invoker = invoker;
         this.getRandomUsers = getRandomUsers;
+        this.saveRandomUser = saveRandomUser;
         this.deleteRandomUser = deleteRandomUser;
         this.mapper = mapper;
     }
@@ -88,7 +92,28 @@ public class MainPresenter extends Presenter<MainView> {
                 .execute(invoker);
     }
 
-    public void checkRandomUser(int position) {
-        getView().navigateToDetail(randomUsers.get(position).getId());
+    public void checkRandomUser(final int position) {
+        saveRandomUser.setRandomUser(randomUsers.get(position));
+        UseCaseExecution.create(saveRandomUser)
+                .success(new UseCaseResult<List<RandomUser>>() {
+                    @Override
+                    public void onResult(List<RandomUser> result) {
+                        getView().navigateToDetail(result.get(0).getId());
+                    }
+                })
+                .error(DeleteRandomUserError.class, new UseCaseResult<GetRandomUserError>() {
+                    @Override
+                    public void onResult(GetRandomUserError result) {
+                        getView().showError();
+                    }
+                })
+                .error(InternalUseCaseError.class, new UseCaseResult<InternalUseCaseError>() {
+                    @Override
+                    public void onResult(InternalUseCaseError result) {
+                        getView().showError();
+                    }
+                })
+                .execute(invoker);
+
     }
 }

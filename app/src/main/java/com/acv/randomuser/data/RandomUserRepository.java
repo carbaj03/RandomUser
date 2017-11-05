@@ -38,6 +38,12 @@ public class RandomUserRepository {
         return network.obtainAllRandomUsers();
     }
 
+    public List<RandomUser> persistRandomUserModel(List<RandomUser> randomUsers) throws LocalGatewayException {
+        localStorage.deleteAll(RandomUserLocalModel.class);
+        localStorage.persist(mapper.inverseMap(randomUsers));
+        return randomUsers;
+    }
+
     public void persistDeleteRandomUserModel(List<RandomUser> randomUsers) throws LocalGatewayException {
         localStorage.persist(mapperDelete.inverseMap(randomUsers));
     }
