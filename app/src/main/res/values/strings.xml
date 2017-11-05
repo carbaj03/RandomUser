@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">RandomUser</string>
+
+    <string name="error">Error</string>
+    <string name="error_network">Error de Red</string>
+    <string name="main_title">Random Users</string>
 </resources>

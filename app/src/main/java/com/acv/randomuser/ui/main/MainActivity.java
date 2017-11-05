@@ -1,6 +1,7 @@
 package com.acv.randomuser.ui.main;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Random Users");
+        getSupportActionBar().setTitle(R.string.main_title);
     }
 
     private void initRecyclerView() {
@@ -58,5 +59,15 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void showRandomUsers(List<RandomUserModel> randomUsers) {
         adapter.addAll(randomUsers);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError() {
+        Snackbar.make(rvRandomUser, R.string.error, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showErrorNetwork() {
+        Snackbar.make(rvRandomUser, R.string.error_network, Snackbar.LENGTH_SHORT).show();
     }
 }

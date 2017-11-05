@@ -31,7 +31,7 @@ public class GetRandomUsersShould {
     }
 
     @Test
-    public void shouldReturnModelWhenNetworkGatewayIsCalled() {
+    public void shouldReturnModelWhenNetworkGatewayIsCalled() throws Exception {
         List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(10);
         when(repository.getRandomUsers(10)).thenReturn(randomUsers);
 

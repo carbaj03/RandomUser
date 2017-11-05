@@ -45,22 +45,25 @@ public class RandomUserRetrofit implements RandomUserNetwork {
     }
 
     @NonNull
-    private List<RandomUser> getRandomUsers() throws IOException, NetworkGatewayException {
-        Call<RandomUserResponse> call = apiClient.getAllRandomUsers();
-        Response<RandomUserResponse> response = call.execute();
+    private List<RandomUser> getRandomUsers() throws IOException, NetworkGatewayException, NetworkException {
+        Response<RandomUserResponse> response = apiClient.getAllRandomUsers().execute();
         if (response.isSuccessful()) {
             return getRandomUsers(response);
-        } else if (response.code() >= 400 && response.code() < 500) {
+        } else if (isClientError(response)) {
             throw new NetworkGatewayException();
         } else {
             throw new NetworkException();
         }
     }
 
+    private boolean isClientError(Response<RandomUserResponse> response) {
+        return response.code() >= 400 && response.code() < 500;
+    }
+
     @NonNull
     private List<RandomUser> getRandomUsers(Response<RandomUserResponse> response) {
-        List<RandomUserResult> results = response.body().getResults();
         List<RandomUser> randomUsers = new ArrayList<>();
+        List<RandomUserResult> results = response.body().getResults();
         if (results != null) {
             for (RandomUserResult result : results) {
                 randomUsers.add(mapper.map(result));

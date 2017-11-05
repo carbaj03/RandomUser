@@ -11,4 +11,8 @@ import me.panavtec.threaddecoratedview.views.qualifiers.ThreadDecoratedView;
 @ThreadDecoratedView
 public interface MainView extends View {
     void showRandomUsers(List<RandomUserModel> randomUsers);
+
+    void showError();
+
+    void showErrorNetwork();
 }

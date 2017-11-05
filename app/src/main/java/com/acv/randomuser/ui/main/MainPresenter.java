@@ -1,6 +1,7 @@
 package com.acv.randomuser.ui.main;
 
 
+import com.acv.randomuser.domain.usecase.NetworkUseCaseError;
 import com.acv.randomuser.domain.usecase.UseCaseError;
 import com.acv.randomuser.domain.usecase.main.GetRandomUserError;
 import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
@@ -47,7 +48,13 @@ public class MainPresenter extends Presenter<MainView> {
                 .error(GetRandomUserError.class, new UseCaseResult<UseCaseError>() {
                     @Override
                     public void onResult(UseCaseError result) {
-
+                        getView().showError();
+                    }
+                })
+                .error(NetworkUseCaseError.class, new UseCaseResult<UseCaseError>() {
+                    @Override
+                    public void onResult(UseCaseError result) {
+                        getView().showErrorNetwork();
                     }
                 })
                 .execute(invoker);

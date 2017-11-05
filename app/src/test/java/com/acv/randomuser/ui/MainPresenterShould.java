@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -43,5 +44,23 @@ public class MainPresenterShould {
         presenter.loadRandomUsers();
 
         verify(view).showRandomUsers(mapper.map(randomUsers));
+    }
+
+    @Test
+    public void showErrorWhenIsGetRandomUserCaseError() throws Exception {
+        when(getRandomUsers.call()).thenReturn(ResponseStub.ERROR_RESPONSE);
+
+        presenter.loadRandomUsers();
+
+        verify(view, times(1)).showError();
+    }
+
+    @Test
+    public void showErrorNetworkWhenIsNetworkUserCaseError() throws Exception {
+        when(getRandomUsers.call()).thenReturn(ResponseStub.ERROR_NET_RESPONSE);
+
+        presenter.loadRandomUsers();
+
+        verify(view, times(1)).showErrorNetwork();
     }
 }

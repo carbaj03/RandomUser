@@ -3,6 +3,7 @@ package com.acv.randomuser.domain.usecase.main;
 
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.domain.error.NetworkException;
+import com.acv.randomuser.domain.error.NetworkGatewayException;
 import com.acv.randomuser.domain.model.RandomUser;
 import com.acv.randomuser.domain.usecase.NetworkUseCaseError;
 import com.acv.randomuser.domain.usecase.UseCase;
@@ -22,7 +23,9 @@ public class GetRandomUsers implements UseCase<UseCaseResponse<List<RandomUser>>
     public UseCaseResponse<List<RandomUser>> call() {
         try {
             return responseSucces(repository.getRandomUsers(10));
-        } catch (Exception e){
+        } catch (NetworkException e){
+            return responseError(new NetworkUseCaseError());
+        } catch (NetworkGatewayException nge){
             return responseError(new GetRandomUserError());
         }
     }
