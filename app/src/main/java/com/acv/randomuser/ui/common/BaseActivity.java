@@ -41,6 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         configToolbar();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        getSupportActionBar().setTitle("");
     }
 
     protected void initToolbar(String title) {

@@ -55,4 +55,11 @@ public class RandomUserStub {
         return randomUsers;
     }
 
+    public static final RandomUser RANDOM_USERS_DETAIL = new RandomUser(
+            "M", new Name("","Juan", "Perez"), new Location("mystreet", "mycity", "mystate", "0"),
+            "myemail", new Login("myusername", "mypassword", "mysalt", "mymd5", "mysha1", "my256"),
+            "myDob", "myRegistered", "myphone", "mycell", new Id("myname", "myvalue"),
+            new Picture("large","mymedium", "mythumbnail"), "myNat");
+
+    public static final Id ID = new Id("", "");
 }

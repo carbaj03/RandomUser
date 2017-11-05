@@ -55,4 +55,9 @@ public class RandomUserRepository {
     public RandomUser obtainBy(Id id) throws LocalGatewayException {
         return localStorage.findById(RandomUserLocalModel.class, id, mapper);
     }
+
+
+    public List<RandomUser> deleteBy(Id id) throws LocalGatewayException {
+        return localStorage.deleteBy(RandomUserLocalModel.class, id, mapper);
+    }
 }
