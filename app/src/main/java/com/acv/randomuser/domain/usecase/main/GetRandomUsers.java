@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Set;
 
 public class GetRandomUsers implements UseCase<UseCaseResponse<List<RandomUser>>> {
-
     private RandomUserRepository repository;
     private Set<Id> discartedIds = new HashSet<>();
 

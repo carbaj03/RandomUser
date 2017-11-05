@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         SwipeToDelete swipeToDelete = new SwipeToDelete(rvRandomUser, new SwipeToDelete.Callback() {
             @Override
             public void onRemove(int position) {
-
+                presenter.removeRandomUser(position);
             }
         });
         swipeToDelete.init();
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showRandomUsers(List<RandomUserModel> randomUsers) {
         adapter.addAll(randomUsers);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -81,5 +80,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showErrorNetwork() {
         Snackbar.make(rvRandomUser, R.string.error_network, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void removeItem(int position) {
+        adapter.remove(position);
     }
 }

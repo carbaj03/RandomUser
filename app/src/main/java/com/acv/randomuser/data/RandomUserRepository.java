@@ -1,7 +1,10 @@
 package com.acv.randomuser.data;
 
 
+import com.acv.randomuser.data.local.LocalStorage;
+import com.acv.randomuser.data.local.mapper.RandomDeleteUserLocalMapper;
 import com.acv.randomuser.domain.RandomUserNetwork;
+import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.error.NetworkException;
 import com.acv.randomuser.domain.error.NetworkGatewayException;
 import com.acv.randomuser.domain.model.RandomUser;
@@ -10,10 +13,14 @@ import java.util.List;
 
 public class RandomUserRepository {
 
-    private RandomUserNetwork network;
+    private final RandomUserNetwork network;
+    private final LocalStorage localStorage;
+    private final RandomDeleteUserLocalMapper mapperDelete;
 
-    public RandomUserRepository(RandomUserNetwork network) {
+    public RandomUserRepository(RandomUserNetwork network, LocalStorage localStorage, RandomDeleteUserLocalMapper mapperDelete) {
         this.network = network;
+        this.localStorage = localStorage;
+        this.mapperDelete = mapperDelete;
     }
 
     public List<RandomUser> getRandomUsers() throws NetworkGatewayException, NetworkException {
@@ -37,5 +44,7 @@ public class RandomUserRepository {
 //        return randomUsers;
     }
 
-
+    public void persistDeleteRandomUserModel(List<RandomUser> randomUsers) throws LocalGatewayException {
+        localStorage.persist(mapperDelete.inverseMap(randomUsers));
+    }
 }

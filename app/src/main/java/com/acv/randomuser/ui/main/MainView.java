@@ -15,4 +15,6 @@ public interface MainView extends View {
     void showError();
 
     void showErrorNetwork();
+
+    void removeItem(int position);
 }

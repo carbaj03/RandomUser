@@ -35,5 +35,11 @@ class RandomUserAdapter extends RecyclerView.Adapter<RandomUserViewHolder> {
 
     public void addAll(List<RandomUserModel> randomUsers) {
         this.randomUsers.addAll(randomUsers);
+        notifyDataSetChanged();
+    }
+
+    public void remove(int position) {
+        this.randomUsers.remove(position);
+        notifyItemRemoved(position);
     }
 }

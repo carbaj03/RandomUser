@@ -26,7 +26,7 @@ public class RandomUserRepositoryShould {
 
     @Before
     public void setUp() throws Exception {
-        repository = new RandomUserRepository(network);
+        repository = new RandomUserRepository(network, localStorage, mapperDelete);
     }
 
     @Test

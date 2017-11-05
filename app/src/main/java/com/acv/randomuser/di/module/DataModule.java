@@ -3,6 +3,9 @@ package com.acv.randomuser.di.module;
 import com.acv.randomuser.BuildConfig;
 import com.acv.randomuser.data.JsonUtil;
 import com.acv.randomuser.data.RandomUserRepository;
+import com.acv.randomuser.data.local.LocalStorage;
+import com.acv.randomuser.data.local.mapper.RandomDeleteUserLocalMapper;
+import com.acv.randomuser.data.local.mapper.RandomUserLocalMapper;
 import com.acv.randomuser.data.network.ApiClient;
 import com.acv.randomuser.data.network.GsonUtil;
 import com.acv.randomuser.data.network.RandomUserResult;
@@ -26,8 +29,17 @@ public class DataModule extends MapperData {
 
     @Provides
     @Singleton
-    public RandomUserRepository provideRandomUserRepository(RandomUserNetwork network) {
-        return new RandomUserRepository(network);
+    public RandomUserRepository provideRandomUserRepository(
+            RandomUserNetwork network,
+            LocalStorage localStorage,
+            RandomDeleteUserLocalMapper mapperDelete) {
+        return new RandomUserRepository(network, localStorage, mapperDelete);
+    }
+
+    @Provides
+    @Singleton
+    public LocalStorage provideLocalStorage(JsonUtil jsonUtil) {
+        return new LocalStorage(jsonUtil);
     }
 
     @Provides

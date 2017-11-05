@@ -33,7 +33,7 @@ public class MainPresenterShould {
     @Before
     public void setUp() {
         presenter = new MainPresenter(new FakeViewInjector(), TestUseCaseInvoker.create(),
-                view, getRandomUsers, mapper);
+                view, getRandomUsers, deleteRandomUser, mapper);
     }
 
     @Test
