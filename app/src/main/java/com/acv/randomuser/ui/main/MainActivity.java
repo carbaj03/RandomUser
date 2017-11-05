@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.acv.randomuser.App;
 import com.acv.randomuser.R;
 import com.acv.randomuser.di.module.MainModule;
 import com.acv.randomuser.ui.common.EndlessRecyclerViewScrollListener;
+import com.acv.randomuser.ui.common.ItemClickListener;
 import com.acv.randomuser.ui.common.SwipeToDelete;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
@@ -54,6 +56,12 @@ public class MainActivity extends AppCompatActivity implements MainView {
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         adapter = new RandomUserAdapter();
+        adapter.setListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+
+            }
+        });
         rvRandomUser.setAdapter(adapter);
         rvRandomUser.setLayoutManager(linearLayoutManager);
         rvRandomUser.setHasFixedSize(true);
@@ -97,6 +105,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void removeItem(int position) {
-        adapter.remove(position);
+        adapter.removeItem(position);
     }
 }

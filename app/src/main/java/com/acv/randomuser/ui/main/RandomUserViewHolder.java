@@ -8,7 +8,9 @@ import android.widget.TextView;
 import com.acv.randomuser.App;
 import com.acv.randomuser.R;
 import com.acv.randomuser.di.module.HolderModule;
+import com.acv.randomuser.ui.common.BaseListViewHolder;
 import com.acv.randomuser.ui.common.ImageLoader;
+import com.acv.randomuser.ui.common.ItemClickListener;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
 import javax.inject.Inject;
@@ -16,7 +18,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RandomUserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class RandomUserViewHolder extends BaseListViewHolder<RandomUserModel> {
 
     @BindView(R.id.ivPicture)
     ImageView ivPicture;
@@ -30,13 +32,13 @@ public class RandomUserViewHolder extends RecyclerView.ViewHolder implements Vie
     @Inject
     protected ImageLoader loader;
 
-    public RandomUserViewHolder(View itemView) {
-        super(itemView);
+    public RandomUserViewHolder(View itemView, ItemClickListener itemClickListener) {
+        super(itemView, itemClickListener);
         ButterKnife.bind(this, itemView);
-        itemView.setOnClickListener(this);
         App.appComponent.plus(new HolderModule()).inject(this);
     }
 
+    @Override
     public void render(RandomUserModel randomUser) {
         loader.loadCircle(randomUser.getPicture(), ivPicture);
         tvName.setText(randomUser.getFullName());
@@ -44,8 +46,4 @@ public class RandomUserViewHolder extends RecyclerView.ViewHolder implements Vie
         tvPhone.setText(randomUser.getPhone());
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

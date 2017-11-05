@@ -6,40 +6,44 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acv.randomuser.R;
+import com.acv.randomuser.ui.common.BaseAdapterList;
+import com.acv.randomuser.ui.common.BaseListViewHolder;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class RandomUserAdapter extends RecyclerView.Adapter<RandomUserViewHolder> {
-    private List<RandomUserModel> randomUsers = new ArrayList<>();
+class RandomUserAdapter  extends BaseAdapterList<RandomUserModel> {
 
     @Override
-    public RandomUserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(
-                parent.getContext()).inflate(R.layout.item_random_user, parent, false);
-        return new RandomUserViewHolder(view);
+    public RandomUserModel getItem(int position) {
+        return data.get(position);
     }
 
     @Override
-    public void onBindViewHolder(RandomUserViewHolder holder, int position) {
-        RandomUserViewHolder randomUserViewHolder = holder;
-        RandomUserModel randomUserModel = randomUsers.get(position);
-        randomUserViewHolder.render(randomUserModel);
+    public List<RandomUserModel> getItems() {
+        return data;
     }
 
     @Override
-    public int getItemCount() {
-        return randomUsers.size();
-    }
-
-    public void addAll(List<RandomUserModel> randomUsers) {
-        this.randomUsers.addAll(randomUsers);
+    public void set(List<RandomUserModel> randomUsers) {
+        validateCollection(randomUsers);
+        data = randomUsers;
         notifyDataSetChanged();
     }
 
-    public void remove(int position) {
-        this.randomUsers.remove(position);
-        notifyItemRemoved(position);
+    @Override
+    public BaseListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new RandomUserViewHolder(inflate(parent, viewType), itemClickListener);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return R.layout.item_random_user;
+    }
+
+    @Override
+    public void onBindViewHolder(BaseListViewHolder holder, int position) {
+        holder.render(data.get(position));
     }
 }
