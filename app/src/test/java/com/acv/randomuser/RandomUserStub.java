@@ -7,6 +7,7 @@ import com.acv.randomuser.domain.model.Name;
 import com.acv.randomuser.domain.model.Picture;
 import com.acv.randomuser.domain.model.RandomUser;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -54,6 +55,18 @@ public class RandomUserStub {
         }
         return randomUsers;
     }
+
+    public static final List<RandomUser> RANDOM_USERS = Arrays.asList(new RandomUser(
+            "M", new Name("","Juan", "Perez"), new Location("mystreet", "mycity", "mystate", "0"),
+            "myemail", new Login("myusername", "mypassword", "mysalt", "mymd5", "mysha1", "my256"),
+            "myDob", "myRegistered", "myphone", "mycell", new Id("myname", "myvalue"),
+            new Picture("large","mymedium", "mythumbnail"), "myNat"));
+
+    public static final RandomUser RANDOM_USER =  new RandomUser(
+            "M", new Name("","Juan", "Perez"), new Location("mystreet", "mycity", "mystate", "0"),
+            "myemail", new Login("myusername", "mypassword", "mysalt", "mymd5", "mysha1", "my256"),
+            "myDob", "myRegistered", "myphone", "mycell", new Id("myname", "myvalue"),
+            new Picture("large","mymedium", "mythumbnail"), "myNat");
 
     public static final RandomUser RANDOM_USERS_DETAIL = new RandomUser(
             "M", new Name("","Juan", "Perez"), new Location("mystreet", "mycity", "mystate", "0"),

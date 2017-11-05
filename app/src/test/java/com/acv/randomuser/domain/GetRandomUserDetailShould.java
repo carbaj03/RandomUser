@@ -1,4 +1,4 @@
-package com.acv.randomuser.ui;
+package com.acv.randomuser.domain;
 
 import android.support.annotation.NonNull;
 
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetRandomUserDetailTest {
+public class GetRandomUserDetailShould {
     @Mock
     private RandomUserRepository repository;
     private GetRandomUserDetail getRandomUserDetail;
@@ -36,7 +36,7 @@ public class GetRandomUserDetailTest {
     }
 
     @Test
-    public void shouldReturnGetRandomUserDetailErrorWhenThrowException() throws Exception {
+    public void returnGetRandomUserDetailErrorWhenThrowException() throws Exception {
         UseCaseResponse<RandomUser> response = getRandomUserDetail.call();
 
         Assert.assertTrue(response.hasError());
@@ -44,7 +44,7 @@ public class GetRandomUserDetailTest {
     }
 
     @Test
-    public void shouldReturnGetRandomUserDetailErrorWhenModelIsEmpty() throws Exception {
+    public void returnGetRandomUserDetailErrorWhenModelIsEmpty() throws Exception {
         UseCaseResponse<RandomUser> response = getRandomUserDetail.call();
 
         Assert.assertTrue(response.hasError());
@@ -52,7 +52,7 @@ public class GetRandomUserDetailTest {
     }
 
     @Test
-    public void shouldReturnDetailUserWhenLocalCallIsSuccess() throws Exception {
+    public void returnDetailUserWhenLocalCallIsSuccess() throws Exception {
         RandomUser randomUsersDetail = getRandomUserDetail();
 
         UseCaseResponse<RandomUser> response = getRandomUserDetail.call();

@@ -24,12 +24,12 @@ import okhttp3.mockwebserver.SocketPolicy;
 
 import static org.mockito.Mockito.when;
 
-public class RandomUserRetrofitTest extends MockWebServerTest {
+public class RandomUserRetrofitShould extends MockWebServerTest {
 
     private TestNetworkModule networkModule;
     private RandomUserRetrofit gateway;
 
-    public RandomUserRetrofitTest() {
+    public RandomUserRetrofitShould() {
         this.networkModule = new TestNetworkModule();
     }
 
@@ -74,7 +74,7 @@ public class RandomUserRetrofitTest extends MockWebServerTest {
     }
 
     @Test(expected = NetworkException.class)
-    public void shouldNetworkExceptionWhenTimeOut() throws Exception {
+    public void throwsNetworkExceptionWhenTimeOut() throws Exception {
         enqueueMockResponse(SocketPolicy.NO_RESPONSE);
 
         gateway.obtainAllRandomUsers();
