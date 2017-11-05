@@ -9,9 +9,14 @@ import com.acv.randomuser.R;
 import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.ui.common.BaseActivity;
 
+import javax.inject.Inject;
+
 public class DetailActivity extends BaseActivity {
     public static final String ID = "Id";
-    
+
+    @Inject
+    protected DetailPresenter presenter;
+
     public static Intent getCallingIntent(@NonNull Activity context, Id id) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(ID, id);
@@ -29,4 +34,6 @@ public class DetailActivity extends BaseActivity {
     public int getLayout() {
         return R.layout.activity_detail;
     }
+
+
 }

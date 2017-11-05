@@ -2,6 +2,7 @@ package com.acv.randomuser.di.component;
 
 import com.acv.randomuser.di.module.AppModule;
 import com.acv.randomuser.di.module.DataModule;
+import com.acv.randomuser.di.module.DetailModule;
 import com.acv.randomuser.di.module.DomainModule;
 import com.acv.randomuser.di.module.HolderModule;
 import com.acv.randomuser.di.module.MainModule;
@@ -20,6 +21,7 @@ import dagger.Component;
 public interface AppComponent {
     MainComponent plus(MainModule module);
     HolderComponent plus(HolderModule holderModule);
+    DetailComponent plus(DetailModule module);
 
     ImageLoader getImageLoader();
 }
