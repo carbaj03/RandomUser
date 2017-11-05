@@ -3,6 +3,7 @@ package com.acv.randomuser.ui;
 import com.acv.randomuser.RandomUserStub;
 import com.acv.randomuser.domain.GetRandomUsers;
 import com.acv.randomuser.domain.UseCaseResponse;
+import com.acv.randomuser.domain.model.RandomUser;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,19 +23,21 @@ public class MainPresenterShould {
     private MainView view;
     @Mock
     private GetRandomUsers getRandomUsers;
+    @Mock
+    private RandomUserMapper mapper;
 
     @Before
     public void setUp() {
-        presenter = new MainPresenter(view, getRandomUsers);
+        presenter = new MainPresenter(view, getRandomUsers, mapper);
     }
 
     @Test
     public void showRamdonUserWhenCallLoadRandomUsers() throws Exception {
-        List<RandomUserModel> randomUsers = RandomUserStub.getRandomUsers(10);
+        List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(10);
         when(getRandomUsers.call()).thenReturn(new UseCaseResponse<>(randomUsers));
 
         presenter.loadRandomUsers();
 
-        verify(view).showRandomUsers(randomUsers);
+        verify(view).showRandomUsers(mapper.map(randomUsers));
     }
 }

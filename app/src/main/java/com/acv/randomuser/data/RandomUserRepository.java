@@ -1,4 +1,5 @@
-package com.acv.randomuser;
+package com.acv.randomuser.data;
+
 
 import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.domain.model.Location;
@@ -10,9 +11,9 @@ import com.acv.randomuser.domain.model.RandomUser;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RandomUserStub {
+public class RandomUserRepository {
 
-    public static List<RandomUser> getRandomUsers(int numberOfRandomUsers) {
+    public List<RandomUser> getRandomUsers(int numberOfRandomUsers) {
         List<RandomUser> randomUsers = new LinkedList<>();
         for (int i = 0; i < numberOfRandomUsers; i++) {
             randomUsers.add(new RandomUser(
@@ -31,5 +32,6 @@ public class RandomUserStub {
         }
         return randomUsers;
     }
+
 
 }

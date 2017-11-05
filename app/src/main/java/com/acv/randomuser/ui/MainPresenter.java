@@ -3,21 +3,24 @@ package com.acv.randomuser.ui;
 
 import com.acv.randomuser.domain.GetRandomUsers;
 import com.acv.randomuser.domain.UseCaseResponse;
+import com.acv.randomuser.domain.model.RandomUser;
 
 import java.util.List;
 
 public class MainPresenter {
     private MainView view;
     private GetRandomUsers getRandomUsers;
+    private RandomUserMapper mapper;
 
-    public MainPresenter(MainView view, GetRandomUsers getRandomUsers) {
+    public MainPresenter(MainView view, GetRandomUsers getRandomUsers, RandomUserMapper mapper) {
         this.view = view;
         this.getRandomUsers = getRandomUsers;
+        this.mapper = mapper;
     }
 
     public void loadRandomUsers() {
-        UseCaseResponse<List<RandomUserModel>> call = getRandomUsers.call();
-        view.showRandomUsers(call.getResult());
+        UseCaseResponse<List<RandomUser>> call = getRandomUsers.call();
+        view.showRandomUsers(mapper.map(call.getResult()));
     }
 
 }

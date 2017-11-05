@@ -1,6 +1,6 @@
 package com.acv.randomuser.di.module;
 
-import com.acv.randomuser.RandomUserRepository;
+import com.acv.randomuser.data.RandomUserRepository;
 
 import javax.inject.Singleton;
 

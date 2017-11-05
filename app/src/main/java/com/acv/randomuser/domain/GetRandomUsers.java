@@ -1,8 +1,8 @@
 package com.acv.randomuser.domain;
 
 
-import com.acv.randomuser.RandomUserRepository;
-import com.acv.randomuser.ui.RandomUserModel;
+import com.acv.randomuser.data.RandomUserRepository;
+import com.acv.randomuser.domain.model.RandomUser;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class GetRandomUsers {
         this.repository = repository;
     }
 
-    public UseCaseResponse<List<RandomUserModel>> call() {
+    public UseCaseResponse<List<RandomUser>> call() {
         return new UseCaseResponse<>(repository.getRandomUsers(10));
     }
 }
