@@ -1,6 +1,7 @@
-package com.acv.randomuser.ui;
+package com.acv.randomuser.ui.model;
 
 import com.acv.randomuser.domain.model.RandomUser;
+import com.acv.randomuser.ui.model.RandomUserModel;
 
 import java.util.ArrayList;
 import java.util.List;

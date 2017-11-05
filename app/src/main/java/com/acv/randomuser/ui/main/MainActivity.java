@@ -1,25 +1,23 @@
-package com.acv.randomuser.ui;
+package com.acv.randomuser.ui.main;
 
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.acv.randomuser.App;
 import com.acv.randomuser.R;
 import com.acv.randomuser.di.module.MainModule;
+import com.acv.randomuser.ui.RandomUserAdapter;
+import com.acv.randomuser.ui.model.RandomUserModel;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity implements MainView{
     @BindView(R.id.rvRandomUser)

@@ -4,6 +4,9 @@ import com.acv.randomuser.RandomUserStub;
 import com.acv.randomuser.domain.GetRandomUsers;
 import com.acv.randomuser.domain.UseCaseResponse;
 import com.acv.randomuser.domain.model.RandomUser;
+import com.acv.randomuser.ui.main.MainPresenter;
+import com.acv.randomuser.ui.main.MainView;
+import com.acv.randomuser.ui.model.RandomUserMapper;
 
 import org.junit.Before;
 import org.junit.Test;

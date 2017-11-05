@@ -1,4 +1,4 @@
-package com.acv.randomuser.ui;
+package com.acv.randomuser.ui.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -6,8 +6,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.acv.randomuser.R;
-
-import java.util.Random;
+import com.acv.randomuser.ui.model.RandomUserModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

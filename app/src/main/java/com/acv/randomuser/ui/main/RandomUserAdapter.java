@@ -1,4 +1,4 @@
-package com.acv.randomuser.ui;
+package com.acv.randomuser.ui.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.acv.randomuser.R;
+import com.acv.randomuser.ui.model.RandomUserModel;
 
 import java.util.ArrayList;
 import java.util.List;

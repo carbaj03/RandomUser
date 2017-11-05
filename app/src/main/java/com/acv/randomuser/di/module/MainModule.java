@@ -4,10 +4,10 @@ package com.acv.randomuser.di.module;
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.di.scope.ActivityScope;
 import com.acv.randomuser.domain.GetRandomUsers;
-import com.acv.randomuser.ui.MainActivity;
-import com.acv.randomuser.ui.MainPresenter;
-import com.acv.randomuser.ui.MainView;
-import com.acv.randomuser.ui.RandomUserMapper;
+import com.acv.randomuser.ui.main.MainActivity;
+import com.acv.randomuser.ui.main.MainPresenter;
+import com.acv.randomuser.ui.main.MainView;
+import com.acv.randomuser.ui.model.RandomUserMapper;
 
 import dagger.Module;
 import dagger.Provides;

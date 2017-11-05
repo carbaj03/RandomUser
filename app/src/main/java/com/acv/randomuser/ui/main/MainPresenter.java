@@ -1,9 +1,10 @@
-package com.acv.randomuser.ui;
+package com.acv.randomuser.ui.main;
 
 
 import com.acv.randomuser.domain.GetRandomUsers;
 import com.acv.randomuser.domain.UseCaseResponse;
 import com.acv.randomuser.domain.model.RandomUser;
+import com.acv.randomuser.ui.model.RandomUserMapper;
 
 import java.util.List;
 

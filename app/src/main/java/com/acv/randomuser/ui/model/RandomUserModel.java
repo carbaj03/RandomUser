@@ -1,4 +1,4 @@
-package com.acv.randomuser.ui;
+package com.acv.randomuser.ui.model;
 
 
 public class RandomUserModel {

@@ -8,6 +8,9 @@ import android.view.View;
 
 import com.acv.randomuser.R;
 import com.acv.randomuser.recyclerview.RecyclerViewInteraction;
+import com.acv.randomuser.ui.main.MainActivity;
+import com.acv.randomuser.ui.main.MainPresenter;
+import com.acv.randomuser.ui.model.RandomUserModel;
 
 import org.junit.Before;
 import org.junit.Rule;
