@@ -1,6 +1,8 @@
 package com.acv.randomuser.domain.usecase.main;
 
 
+import android.util.Log;
+
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.error.NetworkException;

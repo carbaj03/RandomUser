@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         onLoadMore = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-
+                presenter.loadRandomUsers();
             }
         };
         rvRandomUser.addOnScrollListener(onLoadMore);
