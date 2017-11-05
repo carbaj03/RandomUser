@@ -3,6 +3,7 @@ package com.acv.randomuser.data;
 
 import com.acv.randomuser.data.local.LocalStorage;
 import com.acv.randomuser.data.local.mapper.RandomDeleteUserLocalMapper;
+import com.acv.randomuser.data.local.model.RandomDeleteUserLocalModel;
 import com.acv.randomuser.domain.RandomUserNetwork;
 import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.error.NetworkException;
@@ -46,5 +47,9 @@ public class RandomUserRepository {
 
     public void persistDeleteRandomUserModel(List<RandomUser> randomUsers) throws LocalGatewayException {
         localStorage.persist(mapperDelete.inverseMap(randomUsers));
+    }
+
+    public List<RandomUser> obtainAllDeleted() throws LocalGatewayException {
+        return localStorage.findAll(RandomDeleteUserLocalModel.class, mapperDelete);
     }
 }
