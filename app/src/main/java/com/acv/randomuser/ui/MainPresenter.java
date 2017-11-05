@@ -6,7 +6,6 @@ import com.acv.randomuser.domain.UseCaseResponse;
 
 import java.util.List;
 
-
 public class MainPresenter {
     private MainView view;
     private GetRandomUsers getRandomUsers;

@@ -1,6 +1,7 @@
 package com.acv.randomuser.di.module;
 
 
+import com.acv.randomuser.RandomUserRepository;
 import com.acv.randomuser.di.scope.ActivityScope;
 import com.acv.randomuser.domain.GetRandomUsers;
 import com.acv.randomuser.ui.MainActivity;
@@ -33,7 +34,7 @@ public class MainModule extends ActivityModule {
 
     @Provides
     @ActivityScope
-    public GetRandomUsers provideGetRandomUsers() {
-        return new GetRandomUsers();
+    public GetRandomUsers provideGetRandomUsers(RandomUserRepository repository) {
+        return new GetRandomUsers(repository);
     }
 }

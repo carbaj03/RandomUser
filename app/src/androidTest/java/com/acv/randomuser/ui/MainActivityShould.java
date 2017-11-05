@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -24,12 +25,15 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class MainActivityTest {
+public class MainActivityShould {
     private static final int ANY_NUMBER_OF_RANDOM_USER = 10;
 
     @Rule
     public IntentsTestRule<MainActivity> activityRule
             = new IntentsTestRule<>(MainActivity.class, true, false);
+
+    @Mock
+    MainPresenter mainPresenter;
 
     @Before
     public void setUp() throws Exception {
@@ -53,6 +57,7 @@ public class MainActivityTest {
                 });
     }
 
+
     private List<RandomUserModel> givenThereAreSomeRandomUser(int numberOfRandomUsers) {
         List<RandomUserModel> randomUserModels = new LinkedList<>();
         for (int i = 0; i < numberOfRandomUsers; i++) {
@@ -60,8 +65,7 @@ public class MainActivityTest {
             String email = "Email - " + i;
             String picture = "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg";
             String phone = "44444 " + i;
-            RandomUserModel randomUserModel =
-                    new RandomUserModel(fullname, email, picture, phone);
+            RandomUserModel randomUserModel = new RandomUserModel(fullname, email, picture, phone);
             randomUserModels.add(randomUserModel);
         }
         return randomUserModels;
