@@ -2,6 +2,7 @@ package com.acv.randomuser.ui;
 
 import com.acv.randomuser.RandomUserStub;
 import com.acv.randomuser.domain.usecase.UseCaseResponse;
+import com.acv.randomuser.domain.usecase.main.DeleteRandomUser;
 import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
 import com.acv.randomuser.domain.model.RandomUser;
 import com.acv.randomuser.ui.main.MainPresenter;
@@ -27,6 +28,8 @@ public class MainPresenterShould {
     private MainView view;
     @Mock
     private GetRandomUsers getRandomUsers;
+    @Mock
+    private DeleteRandomUser deleteRandomUser;
     @Mock
     private RandomUserMapper mapper;
 

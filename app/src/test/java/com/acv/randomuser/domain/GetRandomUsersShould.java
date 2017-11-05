@@ -50,4 +50,16 @@ public class GetRandomUsersShould {
 
         Assert.assertTrue(response.getResult().size() == 5);
     }
+
+    @Test
+    public void returnRandomUsersNotDeletedYet() throws Exception {
+        List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(5);
+        List<RandomUser> deleted = RandomUserStub.getRandomUsers(1);
+        when(repository.obtainAllDeleted()).thenReturn(deleted);
+        when(repository.getRandomUsers()).thenReturn(randomUsers);
+
+        UseCaseResponse<List<RandomUser>> response = getRandomUsers.call();
+
+        Assert.assertTrue(response.getResult().size() == 4);
+    }
 }

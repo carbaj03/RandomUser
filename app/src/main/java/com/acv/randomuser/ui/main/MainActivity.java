@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import com.acv.randomuser.App;
 import com.acv.randomuser.R;
 import com.acv.randomuser.di.module.MainModule;
+import com.acv.randomuser.ui.common.EndlessRecyclerViewScrollListener;
 import com.acv.randomuser.ui.common.SwipeToDelete;
 import com.acv.randomuser.ui.model.RandomUserModel;
 
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Inject
     protected MainPresenter presenter;
-
+    private EndlessRecyclerViewScrollListener onLoadMore;
     private RandomUserAdapter adapter;
 
     @Override
@@ -51,10 +52,22 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     private void initRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         adapter = new RandomUserAdapter();
         rvRandomUser.setAdapter(adapter);
-        rvRandomUser.setLayoutManager(new LinearLayoutManager(this));
+        rvRandomUser.setLayoutManager(linearLayoutManager);
         rvRandomUser.setHasFixedSize(true);
+        initScrollLoader(linearLayoutManager);
+    }
+
+    private void initScrollLoader(final LinearLayoutManager linearLayoutManager) {
+        onLoadMore = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+
+            }
+        };
+        rvRandomUser.addOnScrollListener(onLoadMore);
     }
 
     private void initSwipeDelete() {
