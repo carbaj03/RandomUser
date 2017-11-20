@@ -45,7 +45,7 @@ public class MainModule extends ActivityModule {
     @Provides
     @ActivityScope
     public GetRandomUsers provideGetRandomUsers(RandomUserRepository repository) {
-        return new GetRandomUsers(repository);
+        return new GetRandomUsers(repository, discartedIds);
     }
 
     @Provides

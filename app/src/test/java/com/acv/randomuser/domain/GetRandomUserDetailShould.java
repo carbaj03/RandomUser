@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.model.RandomUser;
+import com.acv.randomuser.domain.usecase.InternalUseCaseError;
 import com.acv.randomuser.domain.usecase.UseCaseResponse;
 import com.acv.randomuser.domain.usecase.detail.GetRandomUserDetail;
 import com.acv.randomuser.domain.usecase.detail.GetRandomUserDetailError;
@@ -19,6 +20,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 
 import static com.acv.randomuser.RandomUserStub.ID;
+import static com.acv.randomuser.RandomUserStub.RANDOM_USERS;
 import static com.acv.randomuser.RandomUserStub.RANDOM_USERS_DETAIL;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
@@ -27,6 +29,7 @@ import static org.mockito.Mockito.when;
 public class GetRandomUserDetailShould {
     @Mock
     private RandomUserRepository repository;
+
     private GetRandomUserDetail getRandomUserDetail;
 
 
@@ -60,6 +63,7 @@ public class GetRandomUserDetailShould {
         Assert.assertNotNull(response);
         Assert.assertTrue(response.getResult().equals(randomUsersDetail));
     }
+
 
     @NonNull
     private RandomUser getRandomUserDetail() throws LocalGatewayException {

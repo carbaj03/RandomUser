@@ -28,8 +28,6 @@ public class GetRandomUserDetail implements UseCase<UseCaseResponse<RandomUser>>
             return fromLocal();
         } catch (LocalGatewayException ex) {
             return responseError(new GetRandomUserDetailError());
-        } catch (Exception ex) {
-            return responseError(new InternalUseCaseError());
         }
     }
 

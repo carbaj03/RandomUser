@@ -1,8 +1,6 @@
 package com.acv.randomuser.domain.usecase.main;
 
 
-import android.util.Log;
-
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.error.NetworkException;
@@ -15,14 +13,13 @@ import com.acv.randomuser.domain.usecase.UseCaseError;
 import com.acv.randomuser.domain.usecase.UseCaseResponse;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class GetRandomUsers implements UseCase<UseCaseResponse<List<RandomUser>>> {
-    private RandomUserRepository repository;
-    private Set<Id> discartedIds = new HashSet<>();
+    private final RandomUserRepository repository;
+    private DiscartedIds discartedIds;
 
     public GetRandomUsers(RandomUserRepository repository) {
         this.repository = repository;
@@ -30,7 +27,7 @@ public class GetRandomUsers implements UseCase<UseCaseResponse<List<RandomUser>>
 
     public UseCaseResponse<List<RandomUser>> call() {
         try {
-            discartedIds.addAll(obtainIdRemovedUser(repository.obtainAllDeleted()));
+            discartedIds = new DiscartedIds(obtainIdRemovedUser(repository.obtainAllDeleted()));
             return responseSucces(getNotDuplicated(repository.getRandomUsers()));
         } catch (NetworkException e) {
             return responseError(new NetworkUseCaseError());
@@ -53,8 +50,7 @@ public class GetRandomUsers implements UseCase<UseCaseResponse<List<RandomUser>>
         ArrayList<RandomUser> notDuplicateds = new ArrayList<>();
         if (randomUsers != null) {
             for (RandomUser randomUser : randomUsers) {
-                if(!discartedIds.contains(randomUser.getId())){
-                    discartedIds.add(randomUser.getId());
+                if (!discartedIds.contains(randomUser.getId())) {
                     notDuplicateds.add(randomUser);
                 }
             }

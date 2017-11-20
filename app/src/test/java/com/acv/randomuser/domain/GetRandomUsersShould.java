@@ -20,6 +20,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GetRandomUsersShould {
+
     private GetRandomUsers getRandomUsers;
 
     @Mock
@@ -27,7 +28,7 @@ public class GetRandomUsersShould {
 
     @Before
     public void setUp() throws Exception {
-        getRandomUsers = new GetRandomUsers(repository);
+        getRandomUsers = new GetRandomUsers(repository, discartedIds);
     }
 
     @Test
