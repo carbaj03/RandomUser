@@ -1,7 +1,7 @@
 allprojects {
     ext {
 
-        supportLibraryVersion = "26.1.0"
+        supportLibraryVersion = "27.0.2"
         constraintLayoutVersion = "1.0.2"
         dagger = "2.12"
         butterKnife = "8.8.1"

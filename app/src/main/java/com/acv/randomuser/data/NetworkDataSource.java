@@ -33,8 +33,8 @@ public class NetworkDataSource implements RandomUserDataSource {
     }
 
     @Override
-    public RandomUser get(String key) throws LocalException {
-        throw new LocalException();
+    public RandomUser get(Id key) throws LocalException {
+        return new RandomUser();
     }
 
     @Override
@@ -87,7 +87,7 @@ public class NetworkDataSource implements RandomUserDataSource {
     public void populate(List<RandomUser> randomUsers) {}
 
     @Override
-    public Boolean contains(String key) {
-        return true;
+    public Boolean contains(Id key) {
+        return false;
     }
 }

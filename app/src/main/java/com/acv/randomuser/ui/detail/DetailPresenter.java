@@ -32,17 +32,9 @@ public class DetailPresenter extends Presenter<DetailView> {
     public void loadDetailRandomUser(Id id) {
         getRandomUserDetail.setId(id);
         UseCaseExecution.create(getRandomUserDetail)
-                .success(new UseCaseResult<RandomUser>() {
-                    @Override
-                    public void onResult(RandomUser result) {
-                        getView().showRamdonUser(mapper.map(result));
-                    }
-                })
-                .error(GetRandomUserError.class, new UseCaseResult<GetRandomUserError>() {
-                    @Override
-                    public void onResult(GetRandomUserError result) {
+                .success(result -> getView().showRamdonUser(mapper.map(result)))
+                .error(GetRandomUserError.class, result -> {
 
-                    }
                 }).execute(invoker);
     }
 }

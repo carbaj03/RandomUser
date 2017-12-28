@@ -1,13 +1,9 @@
 package com.acv.randomuser.data;
 
 
-import com.acv.randomuser.data.local.LocalStorage;
 import com.acv.randomuser.data.local.mapper.RandomDeleteUserLocalMapper;
 import com.acv.randomuser.data.local.mapper.RandomUserLocalMapper;
-import com.acv.randomuser.data.local.model.RandomDeleteUserLocalModel;
-import com.acv.randomuser.data.local.model.RandomUserLocalModel;
-import com.acv.randomuser.domain.RandomUserNetwork;
-import com.acv.randomuser.domain.error.LocalGatewayException;
+import com.acv.randomuser.domain.error.LocalException;
 import com.acv.randomuser.domain.error.NetworkException;
 import com.acv.randomuser.domain.error.NetworkGatewayException;
 import com.acv.randomuser.domain.model.Id;
@@ -36,12 +32,26 @@ public class RandomUserRepository {
         for (RandomUserDataSource dataSource : dataSources) {
             if(dataSource.isUpdated()){
                 all = dataSource.getAll();
-                dataSource.populate(all);
-                return all;
             }
         }
+        if(all != null){
+            for (RandomUserDataSource dataSource : dataSources) {
+               dataSource.populate(all);
+            }
+        }
+
         return all;
     }
 
 
+    public RandomUser obtainBy(Id id) throws LocalException {
+        RandomUser user = null;
+        for (RandomUserDataSource dataSource : dataSources) {
+            if( dataSource.contains(id)){
+                user = dataSource.get(id);
+                return user;
+            }
+        }
+        return user;
+    }
 }

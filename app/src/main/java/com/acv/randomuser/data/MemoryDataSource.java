@@ -1,9 +1,8 @@
 package com.acv.randomuser.data;
 
 
-import com.acv.randomuser.data.RandomUserDataSource;
-import com.acv.randomuser.data.TimeProvider;
 import com.acv.randomuser.domain.error.LocalException;
+import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.domain.model.RandomUser;
 
 import java.util.LinkedHashMap;
@@ -14,14 +13,17 @@ public class MemoryDataSource implements RandomUserDataSource{
 
     private TimeProvider timeProvider;
 
-
     private Long TIME_UPDATE = TimeUnit.SECONDS.toMillis(1);
 
     private LinkedHashMap cache = new LinkedHashMap<String, RandomUser>();
     private Long lastUpdate = 0L;
 
+    public MemoryDataSource(TimeProvider timeProvider) {
+        this.timeProvider = timeProvider;
+    }
+
     @Override
-    public RandomUser get(String key) throws LocalException {
+    public RandomUser get(Id key) throws LocalException {
         RandomUser user = (RandomUser) cache.get(key);
         if (user == null)
             throw new LocalException();
@@ -42,12 +44,12 @@ public class MemoryDataSource implements RandomUserDataSource{
     public void populate(List<RandomUser> randomUsers) {
         lastUpdate = timeProvider.time();
         for (RandomUser randomUser : randomUsers) {
-            cache.put(randomUser.getId(), randomUsers);
+            cache.put(randomUser.getId(), randomUser);
         }
     }
 
     @Override
-    public Boolean contains(String key) {
+    public Boolean contains(Id key) {
         return cache.containsKey(key);
     }
 }

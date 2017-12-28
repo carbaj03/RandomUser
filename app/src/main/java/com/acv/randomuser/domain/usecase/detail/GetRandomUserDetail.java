@@ -2,6 +2,7 @@ package com.acv.randomuser.domain.usecase.detail;
 
 
 import com.acv.randomuser.data.RandomUserRepository;
+import com.acv.randomuser.domain.error.LocalException;
 import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.domain.model.RandomUser;
@@ -33,7 +34,7 @@ public class GetRandomUserDetail implements UseCase<UseCaseResponse<RandomUser>>
         }
     }
 
-    private UseCaseResponse<RandomUser> fromLocal() throws LocalGatewayException {
+    private UseCaseResponse<RandomUser> fromLocal() throws LocalGatewayException, LocalException {
         RandomUser randomUsers = repository.obtainBy(id);
         if (randomUsers == null) {
             throw new LocalGatewayException();
