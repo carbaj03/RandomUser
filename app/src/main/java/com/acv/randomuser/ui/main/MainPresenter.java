@@ -4,9 +4,6 @@ package com.acv.randomuser.ui.main;
 import com.acv.randomuser.domain.model.RandomUser;
 import com.acv.randomuser.domain.usecase.InternalUseCaseError;
 import com.acv.randomuser.domain.usecase.NetworkUseCaseError;
-import com.acv.randomuser.domain.usecase.UseCaseError;
-import com.acv.randomuser.domain.usecase.UseCaseResult;
-import com.acv.randomuser.domain.usecase.main.DeleteRandomUser;
 import com.acv.randomuser.domain.usecase.main.DeleteRandomUserError;
 import com.acv.randomuser.domain.usecase.main.GetRandomUserError;
 import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
@@ -23,7 +20,6 @@ public class MainPresenter extends Presenter<MainView> {
     private final UseCaseInvoker invoker;
     private final GetRandomUsers getRandomUsers;
     private final SaveRandomUser saveRandomUser;
-    private final DeleteRandomUser deleteRandomUser;
     private final RandomUserMapper mapper;
     private List<RandomUser> randomUsers;
 
@@ -32,7 +28,6 @@ public class MainPresenter extends Presenter<MainView> {
             UseCaseInvoker invoker,
             MainView view,
             GetRandomUsers getRandomUsers,
-            DeleteRandomUser deleteRandomUser,
             SaveRandomUser saveRandomUser,
             RandomUserMapper mapper
     ) {
@@ -40,80 +35,26 @@ public class MainPresenter extends Presenter<MainView> {
         this.invoker = invoker;
         this.getRandomUsers = getRandomUsers;
         this.saveRandomUser = saveRandomUser;
-        this.deleteRandomUser = deleteRandomUser;
         this.mapper = mapper;
     }
 
     public void loadRandomUsers() {
         UseCaseExecution.create(getRandomUsers)
-                .success(new UseCaseResult<List<RandomUser>>() {
-                    @Override
-                    public void onResult(List<RandomUser> result) {
-                        randomUsers = result;
-                        getView().showRandomUsers(mapper.map(result));
-                    }
+                .success(result -> {
+                    randomUsers = result;
+                    getView().showRandomUsers(mapper.map(result));
                 })
-                .error(GetRandomUserError.class, new UseCaseResult<UseCaseError>() {
-                    @Override
-                    public void onResult(UseCaseError result) {
-                        getView().showError();
-                    }
-                })
-                .error(NetworkUseCaseError.class, new UseCaseResult<UseCaseError>() {
-                    @Override
-                    public void onResult(UseCaseError result) {
-                        getView().showErrorNetwork();
-                    }
-                })
-                .execute(invoker);
-    }
-
-    public void removeRandomUser(final int position) {
-        deleteRandomUser.setRandomUser(randomUsers.get(position));
-        UseCaseExecution.create(deleteRandomUser)
-                .success(new UseCaseResult<Boolean>() {
-                    @Override
-                    public void onResult(Boolean result) {
-                        randomUsers.remove(position);
-                        getView().removeItem(position);
-                    }
-                })
-                .error(DeleteRandomUserError.class, new UseCaseResult<GetRandomUserError>() {
-                    @Override
-                    public void onResult(GetRandomUserError result) {
-                        getView().showError();
-                    }
-                })
-                .error(InternalUseCaseError.class, new UseCaseResult<InternalUseCaseError>() {
-                    @Override
-                    public void onResult(InternalUseCaseError result) {
-                        getView().showError();
-                    }
-                })
+                .error(GetRandomUserError.class, result -> getView().showError())
+                .error(NetworkUseCaseError.class, result -> getView().showErrorNetwork())
                 .execute(invoker);
     }
 
     public void checkRandomUser(final int position) {
         saveRandomUser.setRandomUser(randomUsers.get(position));
         UseCaseExecution.create(saveRandomUser)
-                .success(new UseCaseResult<List<RandomUser>>() {
-                    @Override
-                    public void onResult(List<RandomUser> result) {
-                        getView().navigateToDetail(result.get(0).getId());
-                    }
-                })
-                .error(DeleteRandomUserError.class, new UseCaseResult<GetRandomUserError>() {
-                    @Override
-                    public void onResult(GetRandomUserError result) {
-                        getView().showError();
-                    }
-                })
-                .error(InternalUseCaseError.class, new UseCaseResult<InternalUseCaseError>() {
-                    @Override
-                    public void onResult(InternalUseCaseError result) {
-                        getView().showError();
-                    }
-                })
+                .success(result -> getView().navigateToDetail(result.get(0).getId()))
+                .error(DeleteRandomUserError.class, result -> getView().showError())
+                .error(InternalUseCaseError.class, result -> getView().showError())
                 .execute(invoker);
 
     }

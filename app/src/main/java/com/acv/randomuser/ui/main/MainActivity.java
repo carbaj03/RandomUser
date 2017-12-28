@@ -49,7 +49,6 @@ public class MainActivity extends BaseActivity implements MainView {
 
         initToolbar("Random User");
         initRecyclerView();
-        initSwipeDelete();
         presenter.loadRandomUsers();
     }
 
@@ -61,12 +60,9 @@ public class MainActivity extends BaseActivity implements MainView {
     private void initRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         adapter = new RandomUserAdapter();
-        adapter.setListener(new ItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                transitionView = view;
-                presenter.checkRandomUser(position);
-            }
+        adapter.setListener((view, position) -> {
+            transitionView = view;
+            presenter.checkRandomUser(position);
         });
         rvRandomUser.setAdapter(adapter);
         rvRandomUser.setLayoutManager(linearLayoutManager);
@@ -82,16 +78,6 @@ public class MainActivity extends BaseActivity implements MainView {
             }
         };
         rvRandomUser.addOnScrollListener(onLoadMore);
-    }
-
-    private void initSwipeDelete() {
-        SwipeToDelete swipeToDelete = new SwipeToDelete(rvRandomUser, new SwipeToDelete.Callback() {
-            @Override
-            public void onRemove(int position) {
-                presenter.removeRandomUser(position);
-            }
-        });
-        swipeToDelete.init();
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.acv.randomuser.domain;
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.usecase.UseCaseResponse;
-import com.acv.randomuser.domain.usecase.main.DeleteRandomUser;
 import com.acv.randomuser.domain.usecase.main.DeleteRandomUserError;
 
 import org.junit.Assert;
