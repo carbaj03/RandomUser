@@ -41,25 +41,6 @@ public class GetRandomUsersShould {
         Assert.assertTrue(response.getResult().equals(randomUsers));
     }
 
-    @Test
-    public void returnRandomUsersNotDuplicated() throws Exception {
-        List<RandomUser> randomUsers = RandomUserStub.getRandomUsersDuplicated(5,2);
-        when(repository.getRandomUsers()).thenReturn(randomUsers);
 
-        UseCaseResponse<List<RandomUser>> response = getRandomUsers.call();
 
-        Assert.assertTrue(response.getResult().size() == 5);
-    }
-
-    @Test
-    public void returnRandomUsersNotDeletedYet() throws Exception {
-        List<RandomUser> randomUsers = RandomUserStub.getRandomUsers(5);
-        List<RandomUser> deleted = RandomUserStub.getRandomUsers(1);
-        when(repository.obtainAllDeleted()).thenReturn(deleted);
-        when(repository.getRandomUsers()).thenReturn(randomUsers);
-
-        UseCaseResponse<List<RandomUser>> response = getRandomUsers.call();
-
-        Assert.assertTrue(response.getResult().size() == 4);
-    }
 }

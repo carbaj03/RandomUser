@@ -1,23 +1,18 @@
 package com.acv.randomuser.di.module;
 
 import com.acv.randomuser.BuildConfig;
-import com.acv.randomuser.data.JsonUtil;
 import com.acv.randomuser.data.MemoryDataSource;
-import com.acv.randomuser.data.NetworkDataSource;
+import com.acv.randomuser.data.network.NetworkDataSource;
 import com.acv.randomuser.data.RandomUserDataSource;
 import com.acv.randomuser.data.RandomUserRepository;
 import com.acv.randomuser.data.RealTimeProvider;
 import com.acv.randomuser.data.TimeProvider;
-import com.acv.randomuser.data.local.mapper.RandomDeleteUserLocalMapper;
-import com.acv.randomuser.data.local.mapper.RandomUserLocalMapper;
 import com.acv.randomuser.data.network.ApiClient;
-import com.acv.randomuser.data.network.GsonUtil;
 import com.acv.randomuser.data.network.RandomUserResult;
 import com.acv.randomuser.domain.mapper.Mapper;
 import com.acv.randomuser.domain.model.RandomUser;
 
 import java.util.Arrays;
-import java.util.List;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -36,12 +31,9 @@ public class DataModule extends MapperData {
     @Singleton
     public RandomUserRepository provideRandomUserRepository(
             @Named("Network") RandomUserDataSource network,
-            @Named("Local") RandomUserDataSource localStorage,
-            RandomDeleteUserLocalMapper mapperDelete,
-            RandomUserLocalMapper mapper
+            @Named("Local") RandomUserDataSource localStorage
     ) {
-        List<RandomUserDataSource> dataSources = Arrays.asList(localStorage, network);
-        return new RandomUserRepository(dataSources, mapperDelete, mapper);
+        return new RandomUserRepository(Arrays.asList(localStorage, network));
     }
 
     @Provides
@@ -59,12 +51,6 @@ public class DataModule extends MapperData {
             Mapper<RandomUserResult, RandomUser> mapper
     ) {
         return new NetworkDataSource(apiClient, mapper);
-    }
-
-    @Provides
-    @Singleton
-    public JsonUtil provideJsonUtil() {
-        return new GsonUtil();
     }
 
     @Provides

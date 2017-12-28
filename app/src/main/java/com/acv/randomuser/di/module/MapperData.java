@@ -1,17 +1,5 @@
 package com.acv.randomuser.di.module;
 
-import com.acv.randomuser.data.local.mapper.IdLocalMapper;
-import com.acv.randomuser.data.local.mapper.LocationLocalMapper;
-import com.acv.randomuser.data.local.mapper.LoginLocalMapper;
-import com.acv.randomuser.data.local.mapper.NameLocalMapper;
-import com.acv.randomuser.data.local.mapper.PictureLocalMapper;
-import com.acv.randomuser.data.local.mapper.RandomDeleteUserLocalMapper;
-import com.acv.randomuser.data.local.mapper.RandomUserLocalMapper;
-import com.acv.randomuser.data.local.model.IdLocalModel;
-import com.acv.randomuser.data.local.model.LocationLocalModel;
-import com.acv.randomuser.data.local.model.LoginLocalModel;
-import com.acv.randomuser.data.local.model.NameLocalModel;
-import com.acv.randomuser.data.local.model.PictureLocalModel;
 import com.acv.randomuser.data.network.RandomUserResult;
 import com.acv.randomuser.data.network.mapper.IdMapper;
 import com.acv.randomuser.data.network.mapper.LocationMapper;
@@ -25,7 +13,6 @@ import com.acv.randomuser.data.network.model.LoginDataModel;
 import com.acv.randomuser.data.network.model.NameDataModel;
 import com.acv.randomuser.data.network.model.PictureDataModel;
 import com.acv.randomuser.domain.mapper.Mapper;
-import com.acv.randomuser.domain.mapper.TwoWaysMapper;
 import com.acv.randomuser.domain.model.Id;
 import com.acv.randomuser.domain.model.Location;
 import com.acv.randomuser.domain.model.Login;
@@ -81,62 +68,5 @@ public class MapperData {
     @Singleton
     Mapper<LoginDataModel, Login> provideLoginMapper() {
         return new LoginMapper();
-    }
-
-
-
-
-    @Provides
-    @Singleton
-    RandomUserLocalMapper provideRandomUserLocalMapper(
-            TwoWaysMapper<LocationLocalModel, Location> locationMapper,
-            TwoWaysMapper<NameLocalModel, Name> nameMapper,
-            TwoWaysMapper<PictureLocalModel, Picture> pictureMapper,
-            TwoWaysMapper<LoginLocalModel, Login> loginMapper,
-            TwoWaysMapper<IdLocalModel, Id> idMapper
-    ) {
-        return new RandomUserLocalMapper(nameMapper, locationMapper, pictureMapper, loginMapper, idMapper);
-    }
-
-    @Provides
-    @Singleton
-    TwoWaysMapper<LocationLocalModel, Location> provideLocationLocalMapper() {
-        return new LocationLocalMapper();
-    }
-
-    @Provides
-    @Singleton
-    TwoWaysMapper<NameLocalModel, Name> provideNameLocalMapper() {
-        return new NameLocalMapper();
-    }
-
-    @Provides
-    @Singleton
-    TwoWaysMapper<PictureLocalModel, Picture> providePictureLocalMapper() {
-        return new PictureLocalMapper();
-    }
-
-    @Provides
-    @Singleton
-    TwoWaysMapper<IdLocalModel, Id> provideIdLocalMapper() {
-        return new IdLocalMapper();
-    }
-
-    @Provides
-    @Singleton
-    TwoWaysMapper<LoginLocalModel, Login> provideLoginLocalMapper() {
-        return new LoginLocalMapper();
-    }
-
-    @Provides
-    @Singleton
-    RandomDeleteUserLocalMapper provideRandomDeleteUserLocalMapper(
-            TwoWaysMapper<LocationLocalModel, Location> locationMapper,
-            TwoWaysMapper<NameLocalModel, Name> nameMapper,
-            TwoWaysMapper<PictureLocalModel, Picture> pictureMapper,
-            TwoWaysMapper<LoginLocalModel, Login> loginMapper,
-            TwoWaysMapper<IdLocalModel, Id> idMapper
-    ) {
-        return new RandomDeleteUserLocalMapper(nameMapper, locationMapper, pictureMapper, loginMapper, idMapper);
     }
 }

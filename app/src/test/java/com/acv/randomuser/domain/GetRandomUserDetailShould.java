@@ -3,6 +3,7 @@ package com.acv.randomuser.domain;
 import android.support.annotation.NonNull;
 
 import com.acv.randomuser.data.RandomUserRepository;
+import com.acv.randomuser.domain.error.LocalException;
 import com.acv.randomuser.domain.error.LocalGatewayException;
 import com.acv.randomuser.domain.model.RandomUser;
 import com.acv.randomuser.domain.usecase.UseCaseResponse;
@@ -62,7 +63,7 @@ public class GetRandomUserDetailShould {
     }
 
     @NonNull
-    private RandomUser getRandomUserDetail() throws LocalGatewayException {
+    private RandomUser getRandomUserDetail() throws LocalGatewayException, LocalException {
         getRandomUserDetail.setId(ID);
         RandomUser randomUsersDetail = RANDOM_USERS_DETAIL;
         when(repository.obtainBy(ID)).thenReturn(randomUsersDetail);

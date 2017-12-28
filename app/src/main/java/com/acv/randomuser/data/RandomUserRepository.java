@@ -1,8 +1,6 @@
 package com.acv.randomuser.data;
 
 
-import com.acv.randomuser.data.local.mapper.RandomDeleteUserLocalMapper;
-import com.acv.randomuser.data.local.mapper.RandomUserLocalMapper;
 import com.acv.randomuser.domain.error.LocalException;
 import com.acv.randomuser.domain.error.NetworkException;
 import com.acv.randomuser.domain.error.NetworkGatewayException;
@@ -14,32 +12,24 @@ import java.util.List;
 public class RandomUserRepository {
 
     private final List<RandomUserDataSource> dataSources;
-    private final RandomDeleteUserLocalMapper mapperDelete;
-    private final RandomUserLocalMapper mapper;
 
-    public RandomUserRepository(
-            List<RandomUserDataSource> dataSources,
-            RandomDeleteUserLocalMapper mapperDelete,
-            RandomUserLocalMapper mapper
-    ) {
+    public RandomUserRepository(List<RandomUserDataSource> dataSources) {
         this.dataSources = dataSources;
-        this.mapperDelete = mapperDelete;
-        this.mapper = mapper;
     }
 
     public List<RandomUser> getRandomUsers() throws NetworkGatewayException, NetworkException {
         List<RandomUser> all = null;
         for (RandomUserDataSource dataSource : dataSources) {
-            if(dataSource.isUpdated()){
+            if (dataSource.isUpdated()) {
                 all = dataSource.getAll();
             }
         }
-        if(all != null){
+
+        if (all != null) {
             for (RandomUserDataSource dataSource : dataSources) {
-               dataSource.populate(all);
+                dataSource.populate(all);
             }
         }
-
         return all;
     }
 
@@ -47,7 +37,7 @@ public class RandomUserRepository {
     public RandomUser obtainBy(Id id) throws LocalException {
         RandomUser user = null;
         for (RandomUserDataSource dataSource : dataSources) {
-            if( dataSource.contains(id)){
+            if (dataSource.contains(id)) {
                 user = dataSource.get(id);
                 return user;
             }

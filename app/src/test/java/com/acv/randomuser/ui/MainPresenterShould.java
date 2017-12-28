@@ -4,7 +4,6 @@ import com.acv.randomuser.RandomUserStub;
 import com.acv.randomuser.domain.usecase.UseCaseResponse;
 import com.acv.randomuser.domain.usecase.main.GetRandomUsers;
 import com.acv.randomuser.domain.model.RandomUser;
-import com.acv.randomuser.domain.usecase.main.SaveRandomUser;
 import com.acv.randomuser.ui.main.MainPresenter;
 import com.acv.randomuser.ui.main.MainView;
 import com.acv.randomuser.ui.model.RandomUserMapper;
@@ -29,16 +28,12 @@ public class MainPresenterShould {
     @Mock
     private GetRandomUsers getRandomUsers;
     @Mock
-    private DeleteRandomUser deleteRandomUser;
-    @Mock
-    private SaveRandomUser saveRandomUser;
-    @Mock
     private RandomUserMapper mapper;
 
     @Before
     public void setUp() {
         presenter = new MainPresenter(new FakeViewInjector(), TestUseCaseInvoker.create(),
-                view, getRandomUsers, deleteRandomUser, saveRandomUser, mapper);
+                view, getRandomUsers, mapper);
     }
 
     @Test

@@ -45,14 +45,6 @@ public class MainPresenter extends Presenter<MainView> {
     }
 
     public void checkRandomUser(final int position) {
-//        saveRandomUser.setRandomUser(randomUsers.get(position));
-//        UseCaseExecution.create(saveRandomUser)
-//                .success(result -> getView().navigateToDetail(result.get(0).getId()))
-//                .error(DeleteRandomUserError.class, result -> getView().showError())
-//                .error(InternalUseCaseError.class, result -> getView().showError())
-//                .execute(invoker);
-
         getView().navigateToDetail(randomUsers.get(position).getId());
-
     }
 }

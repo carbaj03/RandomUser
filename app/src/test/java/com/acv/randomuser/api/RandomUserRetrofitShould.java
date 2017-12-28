@@ -2,9 +2,8 @@ package com.acv.randomuser.api;
 
 import android.support.annotation.NonNull;
 
-
+import com.acv.randomuser.data.network.NetworkDataSource;
 import com.acv.randomuser.data.network.ApiClient;
-import com.acv.randomuser.data.network.RandomUserRetrofit;
 import com.acv.randomuser.data.network.mapper.IdMapper;
 import com.acv.randomuser.data.network.mapper.LocationMapper;
 import com.acv.randomuser.data.network.mapper.LoginMapper;
@@ -27,7 +26,7 @@ import static org.mockito.Mockito.when;
 public class RandomUserRetrofitShould extends MockWebServerTest {
 
     private TestNetworkModule networkModule;
-    private RandomUserRetrofit gateway;
+    private NetworkDataSource gateway;
 
     public RandomUserRetrofitShould() {
         this.networkModule = new TestNetworkModule();
@@ -36,14 +35,14 @@ public class RandomUserRetrofitShould extends MockWebServerTest {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        gateway = new RandomUserRetrofit(networkModule.getApiClient(getServer()), getMapper());
+        gateway = new NetworkDataSource(networkModule.getApiClient(getServer()), getMapper());
     }
 
     @Test
     public void shouldSendsGetAllRandomUserRequestToTheCorrectEndpoint() throws Exception {
         enqueueMockResponse(200, "getAllRandomUserResponse.json");
 
-        gateway.obtainAllRandomUsers();
+        gateway.getAll();
 
         assertGetRequestSentTo("/?results=40");
     }
@@ -53,7 +52,7 @@ public class RandomUserRetrofitShould extends MockWebServerTest {
             throws Exception {
         enqueueMockResponse(403);
 
-        gateway.obtainAllRandomUsers();
+        gateway.getAll();
     }
 
     @Test(expected = NetworkException.class)
@@ -61,25 +60,24 @@ public class RandomUserRetrofitShould extends MockWebServerTest {
         ApiClient apiClient = Mockito.mock(ApiClient.class);
         when(apiClient.getAllRandomUsers()).thenThrow(UnknownHostException.class);
 
-        RandomUserRetrofit apiGateway = new RandomUserRetrofit(apiClient, getMapper());
+        NetworkDataSource apiGateway = new NetworkDataSource(apiClient, getMapper());
 
-        apiGateway.obtainAllRandomUsers();
+        apiGateway.getAll();
     }
 
     @Test(expected = NetworkGatewayException.class)
     public void throwsNetworkGatewayExceptionWhenInternalServerError() throws Exception {
         enqueueMockResponse(500);
 
-        gateway.obtainAllRandomUsers();
+        gateway.getAll();
     }
 
     @Test(expected = NetworkException.class)
     public void throwsNetworkExceptionWhenTimeOut() throws Exception {
         enqueueMockResponse(SocketPolicy.NO_RESPONSE);
 
-        gateway.obtainAllRandomUsers();
+        gateway.getAll();
     }
-
 
     @NonNull
     private UserMapper getMapper() {

@@ -1,8 +1,9 @@
-package com.acv.randomuser.data;
+package com.acv.randomuser.data.network;
 
 
 import android.support.annotation.NonNull;
 
+import com.acv.randomuser.data.RandomUserDataSource;
 import com.acv.randomuser.data.network.ApiClient;
 import com.acv.randomuser.data.network.RandomUserResponse;
 import com.acv.randomuser.data.network.RandomUserResult;
