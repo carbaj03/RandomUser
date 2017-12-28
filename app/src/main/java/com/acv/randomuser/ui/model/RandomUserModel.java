@@ -3,13 +3,13 @@ package com.acv.randomuser.ui.model;
 
 public class RandomUserModel {
     private String fullName;
-    private String email;
+    private String city;
     private String picture;
     private String phone;
 
-    public RandomUserModel(String fullName, String email, String picture, String phone) {
+    public RandomUserModel(String fullName, String city, String picture, String phone) {
         this.fullName = fullName;
-        this.email = email;
+        this.city = city;
         this.picture = picture;
         this.phone = phone;
     }
@@ -18,8 +18,8 @@ public class RandomUserModel {
         return fullName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCity() {
+        return city;
     }
 
     public String getPicture() {

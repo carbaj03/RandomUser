@@ -1,10 +1,8 @@
 package com.acv.randomuser.ui;
 
-import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
-import android.view.View;
 
 import com.acv.randomuser.R;
 import com.acv.randomuser.recyclerview.RecyclerViewInteraction;
@@ -50,13 +48,10 @@ public class MainActivityShould {
 
         RecyclerViewInteraction.<RandomUserModel>onRecyclerView(withId(R.id.rvRandomUser))
                 .withItems(randomUserModels)
-                .check(new RecyclerViewInteraction.ItemViewAssertion<RandomUserModel>() {
-                    @Override
-                    public void check(RandomUserModel randomUser, View view, NoMatchingViewException e) {
-                        matches(hasDescendant(withText(randomUser.getFullName()))).check(view, e);
-                        matches(hasDescendant(withText(randomUser.getEmail()))).check(view, e);
-                        matches(hasDescendant(withText(randomUser.getPhone()))).check(view, e);
-                    }
+                .check((randomUser, view, e) -> {
+                    matches(hasDescendant(withText(randomUser.getFullName()))).check(view, e);
+                    matches(hasDescendant(withText(randomUser.getCity()))).check(view, e);
+                    matches(hasDescendant(withText(randomUser.getPhone()))).check(view, e);
                 });
     }
 
@@ -65,10 +60,10 @@ public class MainActivityShould {
         List<RandomUserModel> randomUserModels = new LinkedList<>();
         for (int i = 0; i < numberOfRandomUsers; i++) {
             String fullname = "RandomUser - " + i;
-            String email = "Email - " + i;
+            String city = "City - " + i;
             String picture = "https://i.annihil.us/u/prod/marvel/i/mg/c/60/55b6a28ef24fa.jpg";
             String phone = "44444 " + i;
-            RandomUserModel randomUserModel = new RandomUserModel(fullname, email, picture, phone);
+            RandomUserModel randomUserModel = new RandomUserModel(fullname, city, picture, phone);
             randomUserModels.add(randomUserModel);
         }
         return randomUserModels;

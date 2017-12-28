@@ -1,6 +1,5 @@
 package com.acv.randomuser.ui.main;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,8 +23,8 @@ public class RandomUserViewHolder extends BaseListViewHolder<RandomUserModel> {
     ImageView ivPicture;
     @BindView(R.id.tvName)
     TextView tvName;
-    @BindView(R.id.tvEmail)
-    TextView tvEmail;
+    @BindView(R.id.tvCity)
+    TextView tvCity;
     @BindView(R.id.tvPhone)
     TextView tvPhone;
 
@@ -42,7 +41,7 @@ public class RandomUserViewHolder extends BaseListViewHolder<RandomUserModel> {
     public void render(RandomUserModel randomUser) {
         loader.loadCircle(randomUser.getPicture(), ivPicture);
         tvName.setText(randomUser.getFullName());
-        tvEmail.setText(randomUser.getEmail());
+        tvCity.setText(randomUser.getCity());
         tvPhone.setText(randomUser.getPhone());
     }
 

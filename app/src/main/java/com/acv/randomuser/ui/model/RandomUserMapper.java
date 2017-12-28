@@ -24,7 +24,7 @@ public class RandomUserMapper {
         }
         return new RandomUserModel(
                 user.getFullname(),
-                user.getEmail(),
+                user.getFullLocation(),
                 user.getThumbPicture(),
                 user.getPhone()
         );
